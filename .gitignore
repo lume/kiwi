@@ -6,3 +6,6 @@ lib/kiwi.min.js
 lib/kiwi.d.ts
 
 yarn-error.log
+
+*.lock
+*lock.json
