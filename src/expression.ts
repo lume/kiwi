@@ -6,8 +6,8 @@
 | The full license is in the file COPYING.txt, distributed with this software.
 |----------------------------------------------------------------------------*/
 
-import { createMap, IMap } from "./maptype";
-import { Variable } from "./variable";
+import { createMap, IMap } from "./maptype.js";
+import { Variable } from "./variable.js";
 
 /**
  * An expression of variable terms and a constant.

@@ -6,9 +6,9 @@
 | The full license is in the file COPYING.txt, distributed with this software.
 |----------------------------------------------------------------------------*/
 
-import { Expression } from "./expression";
-import { Strength } from "./strength";
-import { Variable } from "./variable";
+import { Expression } from "./expression.js";
+import { Strength } from "./strength.js";
+import { Variable } from "./variable.js";
 
 /**
  * An enum defining the linear constraint operators.

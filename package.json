@@ -1,17 +1,11 @@
 {
-  "name": "kiwi.js",
-  "version": "1.1.2",
-  "homepage": "https://github.com/IjzerenHein/kiwi.js",
-  "repository": "https://github.com/IjzerenHein/kiwi.js",
+  "name": "@lume/kiwi",
+  "version": "0.1.0",
+  "homepage": "https://github.com/lume/kiwi",
+  "repository": "https://github.com/lume/kiwi",
   "main": "lib/kiwi.js",
   "module": "es/kiwi.js",
   "types": "es/kiwi.d.ts",
-  "author": "Chris Colbert <sccolbert@gmail.com>",
-  "contributors": [
-    {
-      "name": "Hein Rutjes <IJzerenHein>"
-    }
-  ],
   "description": "Kiwi is a high speed implementation of the Cassowary constraint solving algorithm",
   "keywords": [
     "cassowary",
