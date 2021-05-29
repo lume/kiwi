@@ -1,7 +1,7 @@
 <a name="module_kiwi"></a>
 
-## kiwi
-Kiwi is an efficient implementation of the Cassowary constraint solving
+## LUME Kiwi
+LUME Kiwi is an efficient implementation of the Cassowary constraint solving
 algorithm, based on the seminal Cassowary paper.
 It is *not* a refactoring or port of the original C++ solver, but
 has been designed from the ground up to be lightweight and fast.
@@ -9,7 +9,7 @@ has been designed from the ground up to be lightweight and fast.
 **Example**
 
 ```javascript
-var kiwi = require('kiwi');
+import * as kiwi from '@lume/kiwi';
 
 // Create a solver
 var solver = new kiwi.Solver();
@@ -31,7 +31,8 @@ solver.suggestValue(width, 500);
 
 // Lets solve the problem!
 solver.updateVariables();
-assert(centerX.value(), 250);
+
+console.assert(centerX.value() === 250);
 ```
 
 ## API Documentation
