@@ -5,8 +5,8 @@ Originally created by Chris Colbert, it was redesigned from the ground up to be 
 
 <!-- Soon it will be compiled to WebAssembly with [AssemblyScript](). -->
 
-
 ## Index
+
 - [Getting started](#getting-started)
 - [Documentation](#documentation)
 - [Benchmarks](#benchmarks)
@@ -16,7 +16,7 @@ Originally created by Chris Colbert, it was redesigned from the ground up to be 
 
 Install using NPM:
 
-	npm install @lume/kiwi
+    npm install @lume/kiwi
 
 The following example creates a solver which automatically calculates the width:
 
@@ -48,26 +48,23 @@ console.assert(right.value() === 500);
 
 - [API Reference](docs/Kiwi.md)
 
-
 ## Benchmarks
 
 To run the benchmark in the browser, [just visit this page](https://rawgit.com/IjzerenHein/kiwi/master/bench/index.html).
 
-To run the benchmark locally using nodejs, *clone or download this repository* and execute the following steps:
+To run the benchmark locally using nodejs, _clone or download this repository_ and execute the following steps:
 
-	npm install
-	npm run bench
-
+    npm install
+    npm run bench
 
 ## Tests
 
 To run the tests in the browser, [just visit this page](https://rawgit.com/IjzerenHein/kiwi/master/test/index.html).
 
-To run the tests locally using nodejs, *clone or download this repository* and execute the following steps:
+To run the tests locally using nodejs, _clone or download this repository_ and execute the following steps:
 
-	npm install
-	npm run build && npm run test
-
+    npm install
+    npm run build && npm run test
 
 ## Contribute
 
@@ -80,7 +77,7 @@ and give it a star.
 © 2021 Joseph Orbegoso Pea (http://github.com/trusktr)
 © 2021 LUME
 
-[![License](https://img.shields.io/badge/license-BDS%203--clause-brightgreen)](https://tldrlegal.com/license/bsd-3-clause-license-(revised))
+[![License](https://img.shields.io/badge/license-BDS%203--clause-brightgreen)](<https://tldrlegal.com/license/bsd-3-clause-license-(revised)>)
 
 <!--
 TODO

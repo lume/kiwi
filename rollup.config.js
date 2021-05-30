@@ -1,4 +1,4 @@
-import { uglify } from 'rollup-plugin-uglify';
+import {uglify} from 'rollup-plugin-uglify';
 
 const license = `
 /*-----------------------------------------------------------------------------
@@ -9,7 +9,9 @@ const license = `
 | The full license is in the file COPYING.txt, distributed with this software.
 -----------------------------------------------------------------------------*/
 `,
-    banner = license + `
+	banner =
+		license +
+		`
 /**
  * Kiwi is an efficient implementation of the Cassowary constraint solving
  * algorithm, based on the seminal Cassowary paper.
@@ -52,41 +54,41 @@ const license = `
 // we generate three output formats:
 // - UMD in lib/kiwi.js
 // - minified UMD in lib/kiwi.min.js
-// - a fully ES6 version in tmp/kiwi.js, used just as the input to jsdoc2md, as we have 
-//   Typescript set to down-compile the others to ES5 for max compatibility, but 
+// - a fully ES6 version in tmp/kiwi.js, used just as the input to jsdoc2md, as we have
+//   Typescript set to down-compile the others to ES5 for max compatibility, but
 //   Typescript's ES5-polyfills confuse jsdoc2md.
 
 const umd = {
-        input: 'es/kiwi.js',
-        output: {
-            file: 'lib/kiwi.js',
-            format: 'umd',
-            name: 'kiwi',
-            exports: 'named',
-            banner
-        }
-    },
-    minified = {
-        ...umd,
-        output: {
-            ...umd.output,
-            file: 'lib/kiwi.min.js'
-        },
-        plugins: [ 
-            uglify({
-                output: {
-                    preamble: license
-                }
-            }) 
-        ]
-    },
-    doc = {
-        input: 'tmp/es/kiwi.js',
-        output: {
-            ...umd.output,
-            file: 'tmp/kiwi.js',
-            format: 'es'
-        }
-    };
+		input: 'es/kiwi.js',
+		output: {
+			file: 'lib/kiwi.js',
+			format: 'umd',
+			name: 'kiwi',
+			exports: 'named',
+			banner,
+		},
+	},
+	minified = {
+		...umd,
+		output: {
+			...umd.output,
+			file: 'lib/kiwi.min.js',
+		},
+		plugins: [
+			uglify({
+				output: {
+					preamble: license,
+				},
+			}),
+		],
+	},
+	doc = {
+		input: 'tmp/es/kiwi.js',
+		output: {
+			...umd.output,
+			file: 'tmp/kiwi.js',
+			format: 'es',
+		},
+	};
 
-export default [ umd, minified, doc ];
+export default [umd, minified, doc];

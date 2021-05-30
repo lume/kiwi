@@ -19,21 +19,20 @@
 			solver.addEditVariable(x2, kiwi.Strength.strong);
 
 			function doit() {
-			    console.time("elapsed");
+				console.time('elapsed');
 				for (var i = 0; i < 1000000; ++i) {
 					solver.suggestValue(x2, i);
 					solver.updateVariables();
 				}
-				console.timeEnd("elapsed");
-				console.log("x1", x1.value());
-				console.log("x2", x2.value());
-				console.log("x3", x3.value());
+				console.timeEnd('elapsed');
+				console.log('x1', x1.value());
+				console.log('x2', x2.value());
+				console.log('x3', x3.value());
 			}
-
 		</script>
-        <title>Sample</title>
+		<title>Sample</title>
 	</head>
-    <body>
-	    <button type="button" onclick="doit()">Do It!</button>
-    </body>
+	<body>
+		<button type="button" onclick="doit()">Do It!</button>
+	</body>
 </html>
