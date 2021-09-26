@@ -45,6 +45,7 @@
 		"cov": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -R test/main",
 		"doc": "jsdoc2md -f tmp/kiwi.js -m none -g none > docs/Kiwi.md",
 		"lint": "tslint -c tslint.json 'src/**/*.ts'",
-		"bench": "node bench/main.js"
+		"bench": "node bench/main.js",
+		"prepare": "npm run build"
 	}
 }
