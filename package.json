@@ -33,6 +33,7 @@
 		"jsdoc-to-markdown": "^5.0.0",
 		"mocha": "^6.2.0",
 		"prettier": "^2.3.0",
+		"rimraf": "^3.0.2",
 		"rollup": "^1.17.0",
 		"rollup-plugin-uglify": "^6.0.2",
 		"tslint": "^5.18.0",
@@ -40,6 +41,7 @@
 	},
 	"scripts": {
 		"build": "tsc && tsc -t es6 --outDir tmp/es && rollup -c",
+		"clean": "rimraf lib/ es/ tmp/",
 		"test": "mocha",
 		"format": "prettier . --write",
 		"cov": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -R test/main",

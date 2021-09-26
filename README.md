@@ -26,11 +26,30 @@ Install using NPM:
 npm install @lume/kiwi
 ```
 
-The following example creates a solver which automatically calculates the width:
+then either load `kiwi` as a global variable using a script tag,
+
+```html
+<script src="/node_modules/kiwi/lib/kiwi.js"></script>
+<script>
+	console.log(kiwi);
+
+	// ...use kiwi...
+</script>
+```
+
+or import it into your ES Module script:
 
 ```js
 import * as kiwi from '@lume/kiwi';
 
+console.log(kiwi);
+
+// ...use kiwi...
+```
+
+The following example creates a solver which automatically calculates a width based on some constraints:
+
+```js
 // Create a solver
 var solver = new kiwi.Solver();
 
