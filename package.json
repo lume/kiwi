@@ -24,12 +24,14 @@
 		"es",
 		"COPYING.txt"
 	],
+	"// Note, we pinned jsdoc to 3.6.1 to prevent an in-range breaking change, https://github.com/jsdoc/jsdoc/issues/1977": "",
 	"devDependencies": {
 		"benchmark": "^2.1.4",
 		"cassowary": "0.0.2",
 		"chai": "^4.2.0",
 		"codecov": "^3.5.0",
 		"istanbul": "^0.4.5",
+		"jsdoc": "3.6.1",
 		"jsdoc-to-markdown": "^5.0.0",
 		"mocha": "^6.2.0",
 		"prettier": "^2.3.0",
