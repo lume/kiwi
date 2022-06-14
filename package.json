@@ -31,8 +31,6 @@
 		"chai": "^4.2.0",
 		"codecov": "^3.5.0",
 		"istanbul": "^0.4.5",
-		"jsdoc": "3.6.1",
-		"jsdoc-to-markdown": "^5.0.0",
 		"mocha": "^6.2.0",
 		"prettier": "^2.3.0",
 		"rimraf": "^3.0.2",
@@ -40,6 +38,11 @@
 		"rollup-plugin-uglify": "^6.0.2",
 		"tslint": "^5.18.0",
 		"typescript": "^3.5.3"
+	},
+	"// TODO for now we disabled jsdoc because it causes an error in LUME super-module's GitHub Actions": "",
+	"devDependenciesDisabled": {
+		"jsdoc": "3.6.1",
+		"jsdoc-to-markdown": "^5.0.0"
 	},
 	"scripts": {
 		"build": "tsc && tsc -t es6 --outDir tmp/es && rollup -c",
