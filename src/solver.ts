@@ -459,8 +459,11 @@ export class Solver {
 	 *
 	 * @private
 	 */
+	
 	private _optimize(objective: Row): void {
-		while (true) {
+		const MAX_ITERATIONS = 10000;
+		let iterations = 0;
+		while (iterations < MAX_ITERATIONS) {
 			let entering = this._getEnteringSymbol(objective);
 			if (entering.type() === SymbolType.Invalid) {
 				return;
@@ -474,6 +477,8 @@ export class Solver {
 			row.solveForEx(leaving, entering);
 			this._substitute(entering, row);
 			this._rowMap.insert(entering, row);
+
+			iterations++;
 		}
 	}
 
