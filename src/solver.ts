@@ -459,7 +459,7 @@ export class Solver {
 	 *
 	 * @private
 	 */
-	
+
 	private _optimize(objective: Row): void {
 		const MAX_ITERATIONS = 10000;
 		let iterations = 0;
@@ -480,6 +480,7 @@ export class Solver {
 
 			iterations++;
 		}
+		throw new Error('solver iterations exceeded');
 	}
 
 	/**
