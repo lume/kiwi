@@ -34,8 +34,8 @@
 		"mocha": "^6.2.0",
 		"prettier": "^2.3.0",
 		"rimraf": "^3.0.2",
-		"rollup": "^1.17.0",
-		"rollup-plugin-uglify": "^6.0.2",
+		"rollup": "1.17.0",
+		"rollup-plugin-uglify": "6.0.2",
 		"tslint": "^5.18.0",
 		"typescript": "^3.5.3"
 	},
