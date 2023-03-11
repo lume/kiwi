@@ -1,0 +1,28 @@
+name: tests
+
+on: [push]
+
+jobs:
+    build:
+        runs-on: ${{ matrix.operating-system }}
+
+        strategy:
+            matrix:
+                operating-system: [ubuntu-latest, windows-latest, macos-latest]
+
+        steps:
+            - uses: actions/checkout@v1
+              with:
+                  submodules: 'recursive'
+                  token: ${{ secrets.ACCESS_TOKEN }}
+            - name: Use Node.js latest
+              uses: actions/setup-node@v3
+              with:
+                  node-version: 17
+            - name: npm install, build, and test
+              run: |
+                  npm install
+                  npm run build
+                  npm test
+              env:
+                  CI: true
