@@ -1,10 +1,9 @@
+.vscode
 node_modules
 tmp/
 es/
 /coverage
 lib/
-
-yarn-error.log
 
 *.lock
 *lock.json
