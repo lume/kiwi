@@ -36,7 +36,6 @@
 		"rimraf": "^3.0.2",
 		"rollup": "1.17.0",
 		"rollup-plugin-uglify": "6.0.2",
-		"tslint": "^5.18.0",
 		"typescript": "^3.5.3"
 	},
 	"// TODO for now we disabled jsdoc because it causes an error in LUME super-module's GitHub Actions": "",
@@ -47,11 +46,11 @@
 	"scripts": {
 		"build": "tsc && tsc -t es6 --outDir tmp/es && rollup -c",
 		"clean": "rimraf lib/ es/ tmp/",
-		"test": "mocha",
+		"test": "npm run lint && mocha",
 		"format": "prettier . --write",
 		"cov": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -R test/main",
 		"doc": "jsdoc2md -f tmp/kiwi.js -m none -g none > docs/Kiwi.md",
-		"lint": "tslint -c tslint.json 'src/**/*.ts'",
+		"lint": "prettier . --check",
 		"bench": "node bench/main.js",
 		"prepare": "npm run build"
 	}
