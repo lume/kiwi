@@ -2,7 +2,7 @@ import {uglify} from 'rollup-plugin-uglify'
 
 const license = `
 /*-----------------------------------------------------------------------------
-| Copyright (c) 2014-2019, Nucleic Development Team & H. Rutjes.
+| Copyright (c) 2014-2019, Nucleic Development Team & H. Rutjes & Lume.
 |
 | Distributed under the terms of the Modified BSD License.
 |
@@ -64,36 +64,36 @@ const license = `
 //   Typescript's ES5-polyfills confuse jsdoc2md.
 
 const umd = {
-		input: 'es/kiwi.js',
-		output: {
-			file: 'lib/kiwi.js',
-			format: 'umd',
-			name: 'kiwi',
-			exports: 'named',
-			banner,
-		},
+	input: 'es/kiwi.js',
+	output: {
+		file: 'lib/kiwi.js',
+		format: 'umd',
+		name: 'kiwi',
+		exports: 'named',
+		banner,
 	},
-	minified = {
-		...umd,
-		output: {
-			...umd.output,
-			file: 'lib/kiwi.min.js',
-		},
-		plugins: [
-			uglify({
-				output: {
-					preamble: license,
-				},
-			}),
-		],
+}
+const minified = {
+	...umd,
+	output: {
+		...umd.output,
+		file: 'lib/kiwi.min.js',
 	},
-	doc = {
-		input: 'tmp/es/kiwi.js',
-		output: {
-			...umd.output,
-			file: 'tmp/kiwi.js',
-			format: 'es',
-		},
-	}
+	plugins: [
+		uglify({
+			output: {
+				preamble: license,
+			},
+		}),
+	],
+}
+const doc = {
+	input: 'tmp/es/kiwi.js',
+	output: {
+		...umd.output,
+		file: 'tmp/kiwi.js',
+		format: 'es',
+	},
+}
 
 export default [umd, minified, doc]
