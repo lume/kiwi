@@ -1,5 +1,5 @@
-import {createMap, IMap} from './maptype.js';
-import {Variable} from './variable.js';
+import {createMap, IMap} from './maptype.js'
+import {Variable} from './variable.js'
 
 /**
  * An expression of variable terms and a constant.
@@ -17,11 +17,11 @@ import {Variable} from './variable.js';
  * @param {...(number|Variable|Expression|Array)} args
  */
 export class Expression {
-	constructor(...args: any[]);
+	constructor(...args: any[])
 	constructor() {
-		let parsed = parseArgs(arguments);
-		this._terms = parsed.terms;
-		this._constant = parsed.constant;
+		let parsed = parseArgs(arguments)
+		this._terms = parsed.terms
+		this._constant = parsed.constant
 	}
 
 	/**
@@ -31,7 +31,7 @@ export class Expression {
 	 * @private
 	 */
 	public terms(): IMap<Variable, number> {
-		return this._terms;
+		return this._terms
 	}
 
 	/**
@@ -39,7 +39,7 @@ export class Expression {
 	 * @private
 	 */
 	public constant(): number {
-		return this._constant;
+		return this._constant
 	}
 
 	/**
@@ -49,12 +49,12 @@ export class Expression {
 	 * @return {Number} computed value of the expression
 	 */
 	public value(): number {
-		let result = this._constant;
+		let result = this._constant
 		for (let i = 0, n = this._terms.size(); i < n; i++) {
-			let pair = this._terms.itemAt(i);
-			result += pair.first.value() * pair.second;
+			let pair = this._terms.itemAt(i)
+			result += pair.first.value() * pair.second
 		}
-		return result;
+		return result
 	}
 
 	/**
@@ -65,7 +65,7 @@ export class Expression {
 	 * @return {Expression} expression
 	 */
 	public plus(value: number | Variable | Expression): Expression {
-		return new Expression(this, value);
+		return new Expression(this, value)
 	}
 
 	/**
@@ -76,7 +76,7 @@ export class Expression {
 	 * @return {Expression} expression
 	 */
 	public minus(value: number | Variable | Expression): Expression {
-		return new Expression(this, typeof value === 'number' ? -value : [-1, value]);
+		return new Expression(this, typeof value === 'number' ? -value : [-1, value])
 	}
 
 	/**
@@ -86,7 +86,7 @@ export class Expression {
 	 * @return {Expression} expression
 	 */
 	public multiply(coefficient: number): Expression {
-		return new Expression([coefficient, this]);
+		return new Expression([coefficient, this])
 	}
 
 	/**
@@ -96,39 +96,39 @@ export class Expression {
 	 * @return {Expression} expression
 	 */
 	public divide(coefficient: number): Expression {
-		return new Expression([1 / coefficient, this]);
+		return new Expression([1 / coefficient, this])
 	}
 
 	public isConstant(): boolean {
-		return this._terms.size() == 0;
+		return this._terms.size() == 0
 	}
 
 	public toString(): string {
 		let result = this._terms.array
 			.map(function (pair) {
-				return pair.second + '*' + pair.first.toString();
+				return pair.second + '*' + pair.first.toString()
 			})
-			.join(' + ');
+			.join(' + ')
 
 		if (!this.isConstant() && this._constant !== 0) {
-			result += ' + ';
+			result += ' + '
 		}
 
-		result += this._constant;
+		result += this._constant
 
-		return result;
+		return result
 	}
 
-	private _terms: IMap<Variable, number>;
-	private _constant: number;
+	private _terms: IMap<Variable, number>
+	private _constant: number
 }
 
 /**
  * An internal interface for the argument parse results.
  */
 interface IParseResult {
-	terms: IMap<Variable, number>;
-	constant: number;
+	terms: IMap<Variable, number>
+	constant: number
 }
 
 /**
@@ -136,46 +136,46 @@ interface IParseResult {
  * @private
  */
 function parseArgs(args: IArguments): IParseResult {
-	let constant = 0.0;
-	let factory = () => 0.0;
-	let terms = createMap<Variable, number>();
+	let constant = 0.0
+	let factory = () => 0.0
+	let terms = createMap<Variable, number>()
 	for (let i = 0, n = args.length; i < n; ++i) {
-		let item = args[i];
+		let item = args[i]
 		if (typeof item === 'number') {
-			constant += item;
+			constant += item
 		} else if (item instanceof Variable) {
-			terms.setDefault(item, factory).second += 1.0;
+			terms.setDefault(item, factory).second += 1.0
 		} else if (item instanceof Expression) {
-			constant += item.constant();
-			let terms2 = item.terms();
+			constant += item.constant()
+			let terms2 = item.terms()
 			for (let j = 0, k = terms2.size(); j < k; j++) {
-				let termPair = terms2.itemAt(j);
-				terms.setDefault(termPair.first, factory).second += termPair.second;
+				let termPair = terms2.itemAt(j)
+				terms.setDefault(termPair.first, factory).second += termPair.second
 			}
 		} else if (item instanceof Array) {
 			if (item.length !== 2) {
-				throw new Error('array must have length 2');
+				throw new Error('array must have length 2')
 			}
-			let value: number = item[0];
-			let value2 = item[1];
+			let value: number = item[0]
+			let value2 = item[1]
 			if (typeof value !== 'number') {
-				throw new Error('array item 0 must be a number');
+				throw new Error('array item 0 must be a number')
 			}
 			if (value2 instanceof Variable) {
-				terms.setDefault(value2, factory).second += value;
+				terms.setDefault(value2, factory).second += value
 			} else if (value2 instanceof Expression) {
-				constant += value2.constant() * value;
-				let terms2 = value2.terms();
+				constant += value2.constant() * value
+				let terms2 = value2.terms()
 				for (let j = 0, k = terms2.size(); j < k; j++) {
-					let termPair = terms2.itemAt(j);
-					terms.setDefault(termPair.first, factory).second += termPair.second * value;
+					let termPair = terms2.itemAt(j)
+					terms.setDefault(termPair.first, factory).second += termPair.second * value
 				}
 			} else {
-				throw new Error('array item 1 must be a variable or expression');
+				throw new Error('array item 1 must be a variable or expression')
 			}
 		} else {
-			throw new Error('invalid Expression argument: ' + item);
+			throw new Error('invalid Expression argument: ' + item)
 		}
 	}
-	return {terms, constant};
+	return {terms, constant}
 }

@@ -10,34 +10,34 @@ has been designed from the ground up to be lightweight and fast.
 **Example**
 
 ```javascript
-import * as kiwi from '@lume/kiwi';
+import * as kiwi from '@lume/kiwi'
 
 // Create a solver
-const solver = new kiwi.Solver();
+const solver = new kiwi.Solver()
 
 // Adjust the max number of solver iterations before an error is thrown if
 // more is needed. Default is 10,000.
-solver.maxIterations = 20000;
+solver.maxIterations = 20000
 
 // Create and add some editable variables
-const left = new kiwi.Variable();
-const width = new kiwi.Variable();
-solver.addEditVariable(left, kiwi.Strength.strong);
-solver.addEditVariable(width, kiwi.Strength.strong);
+const left = new kiwi.Variable()
+const width = new kiwi.Variable()
+solver.addEditVariable(left, kiwi.Strength.strong)
+solver.addEditVariable(width, kiwi.Strength.strong)
 
 // Create a variable calculated through a constraint
-const centerX = new kiwi.Variable();
-const expr = new kiwi.Expression([-1, centerX], left, [0.5, width]);
-solver.addConstraint(new kiwi.Constraint(expr, kiwi.Operator.Eq, kiwi.Strength.required));
+const centerX = new kiwi.Variable()
+const expr = new kiwi.Expression([-1, centerX], left, [0.5, width])
+solver.addConstraint(new kiwi.Constraint(expr, kiwi.Operator.Eq, kiwi.Strength.required))
 
 // Suggest some values to the solver
-solver.suggestValue(left, 0);
-solver.suggestValue(width, 500);
+solver.suggestValue(left, 0)
+solver.suggestValue(width, 500)
 
 // Lets solve the problem!
-solver.updateVariables();
+solver.updateVariables()
 
-console.assert(centerX.value() === 250);
+console.assert(centerX.value() === 250)
 ```
 
 # API Documentation

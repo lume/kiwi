@@ -1,4 +1,4 @@
-import {Expression} from './expression.js';
+import {Expression} from './expression.js'
 
 /**
  * The primary user constraint variable.
@@ -8,7 +8,7 @@ import {Expression} from './expression.js';
  */
 export class Variable {
 	constructor(name: string = '') {
-		this._name = name;
+		this._name = name
 	}
 
 	/**
@@ -16,7 +16,7 @@ export class Variable {
 	 * @private
 	 */
 	public id(): number {
-		return this._id;
+		return this._id
 	}
 
 	/**
@@ -25,7 +25,7 @@ export class Variable {
 	 * @return {String} name of the variable
 	 */
 	public name(): string {
-		return this._name;
+		return this._name
 	}
 
 	/**
@@ -34,7 +34,7 @@ export class Variable {
 	 * @param {String} name Name of the variable
 	 */
 	public setName(name: string): void {
-		this._name = name;
+		this._name = name
 	}
 
 	/**
@@ -42,7 +42,7 @@ export class Variable {
 	 * @private
 	 */
 	public context(): any {
-		return this._context;
+		return this._context
 	}
 
 	/**
@@ -50,7 +50,7 @@ export class Variable {
 	 * @private
 	 */
 	public setContext(context: any): void {
-		this._context = context;
+		this._context = context
 	}
 
 	/**
@@ -59,7 +59,7 @@ export class Variable {
 	 * @return {Number} Calculated value
 	 */
 	public value(): number {
-		return this._value;
+		return this._value
 	}
 
 	/**
@@ -67,7 +67,7 @@ export class Variable {
 	 * @private
 	 */
 	public setValue(value: number): void {
-		this._value = value;
+		this._value = value
 	}
 
 	/**
@@ -78,7 +78,7 @@ export class Variable {
 	 * @return {Expression} expression
 	 */
 	public plus(value: number | Variable | Expression): Expression {
-		return new Expression(this, value);
+		return new Expression(this, value)
 	}
 
 	/**
@@ -89,7 +89,7 @@ export class Variable {
 	 * @return {Expression} expression
 	 */
 	public minus(value: number | Variable | Expression): Expression {
-		return new Expression(this, typeof value === 'number' ? -value : [-1, value]);
+		return new Expression(this, typeof value === 'number' ? -value : [-1, value])
 	}
 
 	/**
@@ -99,7 +99,7 @@ export class Variable {
 	 * @return {Expression} expression
 	 */
 	public multiply(coefficient: number): Expression {
-		return new Expression([coefficient, this]);
+		return new Expression([coefficient, this])
 	}
 
 	/**
@@ -109,7 +109,7 @@ export class Variable {
 	 * @return {Expression} expression
 	 */
 	public divide(coefficient: number): Expression {
-		return new Expression([1 / coefficient, this]);
+		return new Expression([1 / coefficient, this])
 	}
 
 	/**
@@ -120,21 +120,21 @@ export class Variable {
 		return {
 			name: this._name,
 			value: this._value,
-		};
+		}
 	}
 
 	public toString(): string {
-		return this._context + '[' + this._name + ':' + this._value + ']';
+		return this._context + '[' + this._name + ':' + this._value + ']'
 	}
 
-	private _name: string;
-	private _value: number = 0.0;
-	private _context: any = null;
-	private _id: number = VarId++;
+	private _name: string
+	private _value: number = 0.0
+	private _context: any = null
+	private _id: number = VarId++
 }
 
 /**
  * The internal variable id counter.
  * @private
  */
-let VarId = 0;
+let VarId = 0

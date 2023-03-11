@@ -1,25 +1,25 @@
 export interface IMap<T extends {id(): number}, U> extends IndexedMap<T, U> {}
 
 export function createMap<T extends {id(): number}, U>(): IMap<T, U> {
-	return new IndexedMap<T, U>();
+	return new IndexedMap<T, U>()
 }
 
 class IndexedMap<T extends {id(): number}, U> {
-	public index = {} as {[id: number]: number | undefined};
-	public array = [] as Array<Pair<T, U>>;
+	public index = {} as {[id: number]: number | undefined}
+	public array = [] as Array<Pair<T, U>>
 
 	/**
 	 * Returns the number of items in the array.
 	 */
 	public size(): number {
-		return this.array.length;
+		return this.array.length
 	}
 
 	/**
 	 * Returns true if the array is empty.
 	 */
 	public empty(): boolean {
-		return this.array.length === 0;
+		return this.array.length === 0
 	}
 
 	/**
@@ -28,7 +28,7 @@ class IndexedMap<T extends {id(): number}, U> {
 	 * @param index The integer index of the desired item.
 	 */
 	public itemAt(index: number): Pair<T, U> {
-		return this.array[index];
+		return this.array[index]
 	}
 
 	/**
@@ -37,7 +37,7 @@ class IndexedMap<T extends {id(): number}, U> {
 	 * @param key The key to locate in the array.
 	 */
 	public contains(key: T) {
-		return this.index[key.id()] !== undefined;
+		return this.index[key.id()] !== undefined
 	}
 
 	/**
@@ -46,8 +46,8 @@ class IndexedMap<T extends {id(): number}, U> {
 	 * @param key The key to locate in the array.
 	 */
 	public find(key: T) {
-		const i = this.index[key.id()];
-		return i === undefined ? undefined : this.array[i];
+		const i = this.index[key.id()]
+		return i === undefined ? undefined : this.array[i]
 	}
 
 	/**
@@ -60,14 +60,14 @@ class IndexedMap<T extends {id(): number}, U> {
 	 * @param factory The function which creates the default value.
 	 */
 	public setDefault(key: T, factory: () => U): Pair<T, U> {
-		const i = this.index[key.id()];
+		const i = this.index[key.id()]
 		if (i === undefined) {
-			const pair = new Pair(key, factory());
-			this.index[key.id()] = this.array.length;
-			this.array.push(pair);
-			return pair;
+			const pair = new Pair(key, factory())
+			this.index[key.id()] = this.array.length
+			this.array.push(pair)
+			return pair
 		} else {
-			return this.array[i];
+			return this.array[i]
 		}
 	}
 
@@ -80,15 +80,15 @@ class IndexedMap<T extends {id(): number}, U> {
 	 * @param value The value portion of the pair.
 	 */
 	public insert(key: T, value: U): Pair<T, U> {
-		const pair = new Pair(key, value);
-		const i = this.index[key.id()];
+		const pair = new Pair(key, value)
+		const i = this.index[key.id()]
 		if (i === undefined) {
-			this.index[key.id()] = this.array.length;
-			this.array.push(pair);
+			this.index[key.id()] = this.array.length
+			this.array.push(pair)
 		} else {
-			this.array[i] = pair;
+			this.array[i] = pair
 		}
-		return pair;
+		return pair
 	}
 
 	/**
@@ -97,31 +97,31 @@ class IndexedMap<T extends {id(): number}, U> {
 	 * @param key The key to remove from the map.
 	 */
 	public erase(key: T): Pair<T, U> {
-		const i = this.index[key.id()];
+		const i = this.index[key.id()]
 		if (i === undefined) {
-			return undefined;
+			return undefined
 		}
-		this.index[key.id()] = undefined;
-		const pair = this.array[i];
-		const last = this.array.pop();
+		this.index[key.id()] = undefined
+		const pair = this.array[i]
+		const last = this.array.pop()
 		if (pair !== last) {
-			this.array[i] = last;
-			this.index[last.first.id()] = i;
+			this.array[i] = last
+			this.index[last.first.id()] = i
 		}
-		return pair;
+		return pair
 	}
 
 	/**
 	 * Create a copy of this associative array.
 	 */
 	public copy(): IndexedMap<T, U> {
-		const copy = new IndexedMap<T, U>();
+		const copy = new IndexedMap<T, U>()
 		for (let i = 0; i < this.array.length; i++) {
-			const pair = this.array[i].copy();
-			copy.array[i] = pair;
-			copy.index[pair.first.id()] = i;
+			const pair = this.array[i].copy()
+			copy.array[i] = pair
+			copy.index[pair.first.id()] = i
 		}
-		return copy;
+		return copy
 	}
 }
 
@@ -143,6 +143,6 @@ class Pair<T, U> {
 	 * Create a copy of the pair.
 	 */
 	public copy() {
-		return new Pair(this.first, this.second);
+		return new Pair(this.first, this.second)
 	}
 }

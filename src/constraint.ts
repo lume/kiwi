@@ -1,6 +1,6 @@
-import {Expression} from './expression.js';
-import {Strength} from './strength.js';
-import {Variable} from './variable.js';
+import {Expression} from './expression.js'
+import {Strength} from './strength.js'
+import {Variable} from './variable.js'
 
 /**
  * An enum defining the linear constraint operators.
@@ -38,12 +38,12 @@ export class Constraint {
 		rhs?: Expression | Variable | number,
 		strength: number = Strength.required,
 	) {
-		this._operator = operator;
-		this._strength = Strength.clip(strength);
+		this._operator = operator
+		this._strength = Strength.clip(strength)
 		if (rhs === undefined && expression instanceof Expression) {
-			this._expression = expression;
+			this._expression = expression
 		} else {
-			this._expression = expression.minus(rhs);
+			this._expression = expression.minus(rhs)
 		}
 	}
 
@@ -52,7 +52,7 @@ export class Constraint {
 	 * @private
 	 */
 	public id(): number {
-		return this._id;
+		return this._id
 	}
 
 	/**
@@ -61,7 +61,7 @@ export class Constraint {
 	 * @return {Expression} expression
 	 */
 	public expression(): Expression {
-		return this._expression;
+		return this._expression
 	}
 
 	/**
@@ -70,7 +70,7 @@ export class Constraint {
 	 * @return {Operator} linear constraint operator
 	 */
 	public op(): Operator {
-		return this._operator;
+		return this._operator
 	}
 
 	/**
@@ -79,28 +79,23 @@ export class Constraint {
 	 * @return {Number} strength
 	 */
 	public strength(): number {
-		return this._strength;
+		return this._strength
 	}
 
 	public toString(): string {
 		return (
-			this._expression.toString() +
-			' ' +
-			['<=', '>=', '='][this._operator] +
-			' 0 (' +
-			this._strength.toString() +
-			')'
-		);
+			this._expression.toString() + ' ' + ['<=', '>=', '='][this._operator] + ' 0 (' + this._strength.toString() + ')'
+		)
 	}
 
-	private _expression: Expression;
-	private _operator: Operator;
-	private _strength: number;
-	private _id: number = CnId++;
+	private _expression: Expression
+	private _operator: Operator
+	private _strength: number
+	private _id: number = CnId++
 }
 
 /**
  * The internal constraint id counter.
  * @private
  */
-let CnId = 0;
+let CnId = 0

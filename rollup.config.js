@@ -1,4 +1,4 @@
-import {uglify} from 'rollup-plugin-uglify';
+import {uglify} from 'rollup-plugin-uglify'
 
 const license = `
 /*-----------------------------------------------------------------------------
@@ -54,7 +54,7 @@ const license = `
  * ## API Documentation
  * @module @lume/kiwi
  */
-`;
+`
 
 // we generate three output formats:
 // - UMD in lib/kiwi.js
@@ -94,6 +94,6 @@ const umd = {
 			file: 'tmp/kiwi.js',
 			format: 'es',
 		},
-	};
+	}
 
-export default [umd, minified, doc];
+export default [umd, minified, doc]
