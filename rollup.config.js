@@ -26,6 +26,10 @@ const license = `
  * // Create a solver
  * const solver = new kiwi.Solver();
  *
+ * // Adjust the max number of solver iterations before an error is thrown if
+ * // more is needed. Default is 10,000.
+ * solver.maxIterations = 20000;
+ *
  * // Create and add some editable variables
  * const left = new kiwi.Variable();
  * const width = new kiwi.Variable();

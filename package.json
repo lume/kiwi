@@ -6,7 +6,7 @@
 	"main": "lib/kiwi.js",
 	"module": "es/kiwi.js",
 	"types": "es/kiwi.d.ts",
-	"description": "Kiwi is a high speed implementation of the Cassowary constraint solving algorithm",
+	"description": "High speed Cassowary constraint solver in JavaScript.",
 	"keywords": [
 		"cassowary",
 		"kiwi",

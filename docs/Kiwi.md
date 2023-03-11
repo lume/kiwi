@@ -15,6 +15,10 @@ import * as kiwi from '@lume/kiwi';
 // Create a solver
 const solver = new kiwi.Solver();
 
+// Adjust the max number of solver iterations before an error is thrown if
+// more is needed. Default is 10,000.
+solver.maxIterations = 20000;
+
 // Create and add some editable variables
 const left = new kiwi.Variable();
 const width = new kiwi.Variable();
@@ -67,6 +71,7 @@ console.assert(centerX.value() === 250);
     - [.strength()](#module_@lume/kiwi..Constraint+strength) ⇒ <code>Number</code>
   - [~Solver](#module_@lume/kiwi..Solver)
     - [new Solver()](#new_module_@lume/kiwi..Solver_new)
+    - [.maxIterations](#module_@lume/kiwi..Solver+maxIterations) : <code>number</code>
     - [.createConstraint(lhs, operator, rhs, [strength])](#module_@lume/kiwi..Solver+createConstraint)
     - [.addConstraint(constraint)](#module_@lume/kiwi..Solver+addConstraint)
     - [.removeConstraint(constraint)](#module_@lume/kiwi..Solver+removeConstraint)
@@ -392,6 +397,7 @@ The constraint solver class.
 
 - [~Solver](#module_@lume/kiwi..Solver)
   - [new Solver()](#new_module_@lume/kiwi..Solver_new)
+  - [.maxIterations](#module_@lume/kiwi..Solver+maxIterations) : <code>number</code>
   - [.createConstraint(lhs, operator, rhs, [strength])](#module_@lume/kiwi..Solver+createConstraint)
   - [.addConstraint(constraint)](#module_@lume/kiwi..Solver+addConstraint)
   - [.removeConstraint(constraint)](#module_@lume/kiwi..Solver+removeConstraint)
@@ -408,6 +414,13 @@ The constraint solver class.
 
 Construct a new Solver.
 
+<a name="module_@lume/kiwi..Solver+maxIterations"></a>
+
+#### solver.maxIterations : <code>number</code>
+
+- The max number of solver iterations before an erroris thrown, in order to prevent infinite iteration. Default: `10,000`.
+
+**Kind**: instance property of [<code>Solver</code>](#module_@lume/kiwi..Solver)  
 <a name="module_@lume/kiwi..Solver+createConstraint"></a>
 
 #### solver.createConstraint(lhs, operator, rhs, [strength])

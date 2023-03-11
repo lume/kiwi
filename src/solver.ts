@@ -11,6 +11,12 @@ import {Variable} from './variable.js';
  */
 export class Solver {
 	/**
+	 * @type {number} - The max number of solver iterations before an error
+	 * is thrown, in order to prevent infinite iteration. Default: `10,000`.
+	 */
+	public maxIterations = 1000;
+
+	/**
 	 * Construct a new Solver.
 	 */
 	constructor() {}
@@ -461,9 +467,8 @@ export class Solver {
 	 */
 
 	private _optimize(objective: Row): void {
-		const MAX_ITERATIONS = 10000;
 		let iterations = 0;
-		while (iterations < MAX_ITERATIONS) {
+		while (iterations < this.maxIterations) {
 			let entering = this._getEnteringSymbol(objective);
 			if (entering.type() === SymbolType.Invalid) {
 				return;
