@@ -23,6 +23,7 @@ jobs:
               run: |
                   npm install
                   npm run build
+                  npm run doc
                   npm test
               env:
                   CI: true
