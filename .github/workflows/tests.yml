@@ -20,10 +20,13 @@ jobs:
         with:
           node-version: 17
       - name: npm install, build, and test
+        # Note, we run bench and cov just to make sure they run successfully, but we're not doing anything with the result yet.
         run: |
           npm install
           npm run build
           npm run doc
+          npm run bench
           npm test
+          npm run cov
         env:
           CI: true
