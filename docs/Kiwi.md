@@ -1,8 +1,8 @@
-<a name="module_kiwi"></a>
+<a name="module_@lume/kiwi"></a>
 
-## LUME Kiwi
+## @lume/kiwi
 
-LUME Kiwi is an efficient implementation of the Cassowary constraint solving
+Lume Kiwi is an efficient implementation of the Cassowary constraint solving
 algorithm, based on the seminal Cassowary paper.
 It is _not_ a refactoring or port of the original C++ solver, but
 has been designed from the ground up to be lightweight and fast.
@@ -13,17 +13,17 @@ has been designed from the ground up to be lightweight and fast.
 import * as kiwi from '@lume/kiwi';
 
 // Create a solver
-var solver = new kiwi.Solver();
+const solver = new kiwi.Solver();
 
 // Create and add some editable variables
-var left = new kiwi.Variable();
-var width = new kiwi.Variable();
+const left = new kiwi.Variable();
+const width = new kiwi.Variable();
 solver.addEditVariable(left, kiwi.Strength.strong);
 solver.addEditVariable(width, kiwi.Strength.strong);
 
 // Create a variable calculated through a constraint
-var centerX = new kiwi.Variable();
-var expr = new kiwi.Expression([-1, centerX], left, [0.5, width]);
+const centerX = new kiwi.Variable();
+const expr = new kiwi.Expression([-1, centerX], left, [0.5, width]);
 solver.addConstraint(new kiwi.Constraint(expr, kiwi.Operator.Eq, kiwi.Strength.required));
 
 // Suggest some values to the solver
@@ -38,65 +38,65 @@ console.assert(centerX.value() === 250);
 
 ## API Documentation
 
-- [kiwi](#module_kiwi)
-  - [~Variable](#module_kiwi..Variable)
-    - [new Variable([name])](#new_module_kiwi..Variable_new)
-    - [.name()](#module_kiwi..Variable+name) ⇒ <code>String</code>
-    - [.setName(name)](#module_kiwi..Variable+setName)
-    - [.value()](#module_kiwi..Variable+value) ⇒ <code>Number</code>
-    - [.plus(value)](#module_kiwi..Variable+plus) ⇒ <code>Expression</code>
-    - [.minus(value)](#module_kiwi..Variable+minus) ⇒ <code>Expression</code>
-    - [.multiply(coefficient)](#module_kiwi..Variable+multiply) ⇒ <code>Expression</code>
-    - [.divide(coefficient)](#module_kiwi..Variable+divide) ⇒ <code>Expression</code>
-  - [~Expression](#module_kiwi..Expression)
-    - [new Expression(...args)](#new_module_kiwi..Expression_new)
-    - [.plus(value)](#module_kiwi..Expression+plus) ⇒ <code>Expression</code>
-    - [.minus(value)](#module_kiwi..Expression+minus) ⇒ <code>Expression</code>
-    - [.multiply(coefficient)](#module_kiwi..Expression+multiply) ⇒ <code>Expression</code>
-    - [.divide(coefficient)](#module_kiwi..Expression+divide) ⇒ <code>Expression</code>
-  - [~Strength](#module_kiwi..Strength)
-    - [.required](#module_kiwi..Strength.required)
-    - [.strong](#module_kiwi..Strength.strong)
-    - [.medium](#module_kiwi..Strength.medium)
-    - [.weak](#module_kiwi..Strength.weak)
-    - [.create(a, b, c, [w])](#module_kiwi..Strength.create) ⇒
-  - [~Constraint](#module_kiwi..Constraint)
-    - [new Constraint(expression, operator, [rhs], [strength])](#new_module_kiwi..Constraint_new)
-    - [.expression()](#module_kiwi..Constraint+expression) ⇒ <code>Expression</code>
-    - [.op()](#module_kiwi..Constraint+op) ⇒ <code>Operator</code>
-    - [.strength()](#module_kiwi..Constraint+strength) ⇒ <code>Number</code>
-  - [~Solver](#module_kiwi..Solver)
-    - [new Solver()](#new_module_kiwi..Solver_new)
-    - [.createConstraint(lhs, operator, rhs, [strength])](#module_kiwi..Solver+createConstraint)
-    - [.addConstraint(constraint)](#module_kiwi..Solver+addConstraint)
-    - [.removeConstraint(constraint)](#module_kiwi..Solver+removeConstraint)
-    - [.hasConstraint(constraint)](#module_kiwi..Solver+hasConstraint) ⇒ <code>Bool</code>
-    - [.addEditVariable(variable, strength)](#module_kiwi..Solver+addEditVariable)
-    - [.removeEditVariable(variable)](#module_kiwi..Solver+removeEditVariable)
-    - [.hasEditVariable(variable)](#module_kiwi..Solver+hasEditVariable) ⇒ <code>Bool</code>
-    - [.suggestValue(variable, value)](#module_kiwi..Solver+suggestValue)
-    - [.updateVariables()](#module_kiwi..Solver+updateVariables)
-  - [~Operator](#module_kiwi..Operator) : <code>enum</code>
+- [@lume/kiwi](#module_@lume/kiwi)
+  - [~Variable](#module_@lume/kiwi..Variable)
+    - [new Variable([name])](#new_module_@lume/kiwi..Variable_new)
+    - [.name()](#module_@lume/kiwi..Variable+name) ⇒ <code>String</code>
+    - [.setName(name)](#module_@lume/kiwi..Variable+setName)
+    - [.value()](#module_@lume/kiwi..Variable+value) ⇒ <code>Number</code>
+    - [.plus(value)](#module_@lume/kiwi..Variable+plus) ⇒ <code>Expression</code>
+    - [.minus(value)](#module_@lume/kiwi..Variable+minus) ⇒ <code>Expression</code>
+    - [.multiply(coefficient)](#module_@lume/kiwi..Variable+multiply) ⇒ <code>Expression</code>
+    - [.divide(coefficient)](#module_@lume/kiwi..Variable+divide) ⇒ <code>Expression</code>
+  - [~Expression](#module_@lume/kiwi..Expression)
+    - [new Expression(...args)](#new_module_@lume/kiwi..Expression_new)
+    - [.plus(value)](#module_@lume/kiwi..Expression+plus) ⇒ <code>Expression</code>
+    - [.minus(value)](#module_@lume/kiwi..Expression+minus) ⇒ <code>Expression</code>
+    - [.multiply(coefficient)](#module_@lume/kiwi..Expression+multiply) ⇒ <code>Expression</code>
+    - [.divide(coefficient)](#module_@lume/kiwi..Expression+divide) ⇒ <code>Expression</code>
+  - [~Strength](#module_@lume/kiwi..Strength)
+    - [.required](#module_@lume/kiwi..Strength.required)
+    - [.strong](#module_@lume/kiwi..Strength.strong)
+    - [.medium](#module_@lume/kiwi..Strength.medium)
+    - [.weak](#module_@lume/kiwi..Strength.weak)
+    - [.create(a, b, c, [w])](#module_@lume/kiwi..Strength.create) ⇒
+  - [~Constraint](#module_@lume/kiwi..Constraint)
+    - [new Constraint(expression, operator, [rhs], [strength])](#new_module_@lume/kiwi..Constraint_new)
+    - [.expression()](#module_@lume/kiwi..Constraint+expression) ⇒ <code>Expression</code>
+    - [.op()](#module_@lume/kiwi..Constraint+op) ⇒ <code>Operator</code>
+    - [.strength()](#module_@lume/kiwi..Constraint+strength) ⇒ <code>Number</code>
+  - [~Solver](#module_@lume/kiwi..Solver)
+    - [new Solver()](#new_module_@lume/kiwi..Solver_new)
+    - [.createConstraint(lhs, operator, rhs, [strength])](#module_@lume/kiwi..Solver+createConstraint)
+    - [.addConstraint(constraint)](#module_@lume/kiwi..Solver+addConstraint)
+    - [.removeConstraint(constraint)](#module_@lume/kiwi..Solver+removeConstraint)
+    - [.hasConstraint(constraint)](#module_@lume/kiwi..Solver+hasConstraint) ⇒ <code>Bool</code>
+    - [.addEditVariable(variable, strength)](#module_@lume/kiwi..Solver+addEditVariable)
+    - [.removeEditVariable(variable)](#module_@lume/kiwi..Solver+removeEditVariable)
+    - [.hasEditVariable(variable)](#module_@lume/kiwi..Solver+hasEditVariable) ⇒ <code>Bool</code>
+    - [.suggestValue(variable, value)](#module_@lume/kiwi..Solver+suggestValue)
+    - [.updateVariables()](#module_@lume/kiwi..Solver+updateVariables)
+  - [~Operator](#module_@lume/kiwi..Operator) : <code>enum</code>
 
-<a name="module_kiwi..Variable"></a>
+<a name="module_@lume/kiwi..Variable"></a>
 
-### kiwi~Variable
+### @lume/kiwi~Variable
 
 The primary user constraint variable.
 
-**Kind**: inner class of [<code>kiwi</code>](#module_kiwi)
+**Kind**: inner class of [<code>@lume/kiwi</code>](#module_@lume/kiwi)
 
-- [~Variable](#module_kiwi..Variable)
-  - [new Variable([name])](#new_module_kiwi..Variable_new)
-  - [.name()](#module_kiwi..Variable+name) ⇒ <code>String</code>
-  - [.setName(name)](#module_kiwi..Variable+setName)
-  - [.value()](#module_kiwi..Variable+value) ⇒ <code>Number</code>
-  - [.plus(value)](#module_kiwi..Variable+plus) ⇒ <code>Expression</code>
-  - [.minus(value)](#module_kiwi..Variable+minus) ⇒ <code>Expression</code>
-  - [.multiply(coefficient)](#module_kiwi..Variable+multiply) ⇒ <code>Expression</code>
-  - [.divide(coefficient)](#module_kiwi..Variable+divide) ⇒ <code>Expression</code>
+- [~Variable](#module_@lume/kiwi..Variable)
+  - [new Variable([name])](#new_module_@lume/kiwi..Variable_new)
+  - [.name()](#module_@lume/kiwi..Variable+name) ⇒ <code>String</code>
+  - [.setName(name)](#module_@lume/kiwi..Variable+setName)
+  - [.value()](#module_@lume/kiwi..Variable+value) ⇒ <code>Number</code>
+  - [.plus(value)](#module_@lume/kiwi..Variable+plus) ⇒ <code>Expression</code>
+  - [.minus(value)](#module_@lume/kiwi..Variable+minus) ⇒ <code>Expression</code>
+  - [.multiply(coefficient)](#module_@lume/kiwi..Variable+multiply) ⇒ <code>Expression</code>
+  - [.divide(coefficient)](#module_@lume/kiwi..Variable+divide) ⇒ <code>Expression</code>
 
-<a name="new_module_kiwi..Variable_new"></a>
+<a name="new_module_@lume/kiwi..Variable_new"></a>
 
 #### new Variable([name])
 
@@ -104,91 +104,91 @@ The primary user constraint variable.
 | ------ | ------------------- | ------------------------- | ----------------------------------------- |
 | [name] | <code>String</code> | <code>&quot;&quot;</code> | The name to associated with the variable. |
 
-<a name="module_kiwi..Variable+name"></a>
+<a name="module_@lume/kiwi..Variable+name"></a>
 
 #### variable.name() ⇒ <code>String</code>
 
 Returns the name of the variable.
 
-**Kind**: instance method of [<code>Variable</code>](#module_kiwi..Variable)  
+**Kind**: instance method of [<code>Variable</code>](#module_@lume/kiwi..Variable)  
 **Returns**: <code>String</code> - name of the variable  
-<a name="module_kiwi..Variable+setName"></a>
+<a name="module_@lume/kiwi..Variable+setName"></a>
 
 #### variable.setName(name)
 
 Set the name of the variable.
 
-**Kind**: instance method of [<code>Variable</code>](#module_kiwi..Variable)
+**Kind**: instance method of [<code>Variable</code>](#module_@lume/kiwi..Variable)
 
 | Param | Type                | Description          |
 | ----- | ------------------- | -------------------- |
 | name  | <code>String</code> | Name of the variable |
 
-<a name="module_kiwi..Variable+value"></a>
+<a name="module_@lume/kiwi..Variable+value"></a>
 
 #### variable.value() ⇒ <code>Number</code>
 
 Returns the value of the variable.
 
-**Kind**: instance method of [<code>Variable</code>](#module_kiwi..Variable)  
+**Kind**: instance method of [<code>Variable</code>](#module_@lume/kiwi..Variable)  
 **Returns**: <code>Number</code> - Calculated value  
-<a name="module_kiwi..Variable+plus"></a>
+<a name="module_@lume/kiwi..Variable+plus"></a>
 
 #### variable.plus(value) ⇒ <code>Expression</code>
 
 Creates a new Expression by adding a number, variable or expression
 to the variable.
 
-**Kind**: instance method of [<code>Variable</code>](#module_kiwi..Variable)  
+**Kind**: instance method of [<code>Variable</code>](#module_@lume/kiwi..Variable)  
 **Returns**: <code>Expression</code> - expression
 
 | Param | Type                                                                    | Description   |
 | ----- | ----------------------------------------------------------------------- | ------------- |
 | value | <code>Number</code> \| <code>Variable</code> \| <code>Expression</code> | Value to add. |
 
-<a name="module_kiwi..Variable+minus"></a>
+<a name="module_@lume/kiwi..Variable+minus"></a>
 
 #### variable.minus(value) ⇒ <code>Expression</code>
 
 Creates a new Expression by substracting a number, variable or expression
 from the variable.
 
-**Kind**: instance method of [<code>Variable</code>](#module_kiwi..Variable)  
+**Kind**: instance method of [<code>Variable</code>](#module_@lume/kiwi..Variable)  
 **Returns**: <code>Expression</code> - expression
 
 | Param | Type                                                                    | Description         |
 | ----- | ----------------------------------------------------------------------- | ------------------- |
 | value | <code>Number</code> \| <code>Variable</code> \| <code>Expression</code> | Value to substract. |
 
-<a name="module_kiwi..Variable+multiply"></a>
+<a name="module_@lume/kiwi..Variable+multiply"></a>
 
 #### variable.multiply(coefficient) ⇒ <code>Expression</code>
 
 Creates a new Expression by multiplying with a fixed number.
 
-**Kind**: instance method of [<code>Variable</code>](#module_kiwi..Variable)  
+**Kind**: instance method of [<code>Variable</code>](#module_@lume/kiwi..Variable)  
 **Returns**: <code>Expression</code> - expression
 
 | Param       | Type                | Description                   |
 | ----------- | ------------------- | ----------------------------- |
 | coefficient | <code>Number</code> | Coefficient to multiply with. |
 
-<a name="module_kiwi..Variable+divide"></a>
+<a name="module_@lume/kiwi..Variable+divide"></a>
 
 #### variable.divide(coefficient) ⇒ <code>Expression</code>
 
 Creates a new Expression by dividing with a fixed number.
 
-**Kind**: instance method of [<code>Variable</code>](#module_kiwi..Variable)  
+**Kind**: instance method of [<code>Variable</code>](#module_@lume/kiwi..Variable)  
 **Returns**: <code>Expression</code> - expression
 
 | Param       | Type                | Description               |
 | ----------- | ------------------- | ------------------------- |
 | coefficient | <code>Number</code> | Coefficient to divide by. |
 
-<a name="module_kiwi..Expression"></a>
+<a name="module_@lume/kiwi..Expression"></a>
 
-### kiwi~Expression
+### @lume/kiwi~Expression
 
 An expression of variable terms and a constant.
 
@@ -202,16 +202,16 @@ each of which must be one of the following types:
 
 The parameters are summed. The tuples are multiplied.
 
-**Kind**: inner class of [<code>kiwi</code>](#module_kiwi)
+**Kind**: inner class of [<code>@lume/kiwi</code>](#module_@lume/kiwi)
 
-- [~Expression](#module_kiwi..Expression)
-  - [new Expression(...args)](#new_module_kiwi..Expression_new)
-  - [.plus(value)](#module_kiwi..Expression+plus) ⇒ <code>Expression</code>
-  - [.minus(value)](#module_kiwi..Expression+minus) ⇒ <code>Expression</code>
-  - [.multiply(coefficient)](#module_kiwi..Expression+multiply) ⇒ <code>Expression</code>
-  - [.divide(coefficient)](#module_kiwi..Expression+divide) ⇒ <code>Expression</code>
+- [~Expression](#module_@lume/kiwi..Expression)
+  - [new Expression(...args)](#new_module_@lume/kiwi..Expression_new)
+  - [.plus(value)](#module_@lume/kiwi..Expression+plus) ⇒ <code>Expression</code>
+  - [.minus(value)](#module_@lume/kiwi..Expression+minus) ⇒ <code>Expression</code>
+  - [.multiply(coefficient)](#module_@lume/kiwi..Expression+multiply) ⇒ <code>Expression</code>
+  - [.divide(coefficient)](#module_@lume/kiwi..Expression+divide) ⇒ <code>Expression</code>
 
-<a name="new_module_kiwi..Expression_new"></a>
+<a name="new_module_@lume/kiwi..Expression_new"></a>
 
 #### new Expression(...args)
 
@@ -219,108 +219,108 @@ The parameters are summed. The tuples are multiplied.
 | ------- | --------------------------------------------------------------------------------------------- |
 | ...args | <code>number</code> \| <code>Variable</code> \| <code>Expression</code> \| <code>Array</code> |
 
-<a name="module_kiwi..Expression+plus"></a>
+<a name="module_@lume/kiwi..Expression+plus"></a>
 
 #### expression.plus(value) ⇒ <code>Expression</code>
 
 Creates a new Expression by adding a number, variable or expression
 to the expression.
 
-**Kind**: instance method of [<code>Expression</code>](#module_kiwi..Expression)  
+**Kind**: instance method of [<code>Expression</code>](#module_@lume/kiwi..Expression)  
 **Returns**: <code>Expression</code> - expression
 
 | Param | Type                                                                    | Description   |
 | ----- | ----------------------------------------------------------------------- | ------------- |
 | value | <code>Number</code> \| <code>Variable</code> \| <code>Expression</code> | Value to add. |
 
-<a name="module_kiwi..Expression+minus"></a>
+<a name="module_@lume/kiwi..Expression+minus"></a>
 
 #### expression.minus(value) ⇒ <code>Expression</code>
 
 Creates a new Expression by substracting a number, variable or expression
 from the expression.
 
-**Kind**: instance method of [<code>Expression</code>](#module_kiwi..Expression)  
+**Kind**: instance method of [<code>Expression</code>](#module_@lume/kiwi..Expression)  
 **Returns**: <code>Expression</code> - expression
 
 | Param | Type                                                                    | Description         |
 | ----- | ----------------------------------------------------------------------- | ------------------- |
 | value | <code>Number</code> \| <code>Variable</code> \| <code>Expression</code> | Value to substract. |
 
-<a name="module_kiwi..Expression+multiply"></a>
+<a name="module_@lume/kiwi..Expression+multiply"></a>
 
 #### expression.multiply(coefficient) ⇒ <code>Expression</code>
 
 Creates a new Expression by multiplying with a fixed number.
 
-**Kind**: instance method of [<code>Expression</code>](#module_kiwi..Expression)  
+**Kind**: instance method of [<code>Expression</code>](#module_@lume/kiwi..Expression)  
 **Returns**: <code>Expression</code> - expression
 
 | Param       | Type                | Description                   |
 | ----------- | ------------------- | ----------------------------- |
 | coefficient | <code>Number</code> | Coefficient to multiply with. |
 
-<a name="module_kiwi..Expression+divide"></a>
+<a name="module_@lume/kiwi..Expression+divide"></a>
 
 #### expression.divide(coefficient) ⇒ <code>Expression</code>
 
 Creates a new Expression by dividing with a fixed number.
 
-**Kind**: instance method of [<code>Expression</code>](#module_kiwi..Expression)  
+**Kind**: instance method of [<code>Expression</code>](#module_@lume/kiwi..Expression)  
 **Returns**: <code>Expression</code> - expression
 
 | Param       | Type                | Description               |
 | ----------- | ------------------- | ------------------------- |
 | coefficient | <code>Number</code> | Coefficient to divide by. |
 
-<a name="module_kiwi..Strength"></a>
+<a name="module_@lume/kiwi..Strength"></a>
 
-### kiwi~Strength
+### @lume/kiwi~Strength
 
-**Kind**: inner class of [<code>kiwi</code>](#module_kiwi)
+**Kind**: inner class of [<code>@lume/kiwi</code>](#module_@lume/kiwi)
 
-- [~Strength](#module_kiwi..Strength)
-  - [.required](#module_kiwi..Strength.required)
-  - [.strong](#module_kiwi..Strength.strong)
-  - [.medium](#module_kiwi..Strength.medium)
-  - [.weak](#module_kiwi..Strength.weak)
-  - [.create(a, b, c, [w])](#module_kiwi..Strength.create) ⇒
+- [~Strength](#module_@lume/kiwi..Strength)
+  - [.required](#module_@lume/kiwi..Strength.required)
+  - [.strong](#module_@lume/kiwi..Strength.strong)
+  - [.medium](#module_@lume/kiwi..Strength.medium)
+  - [.weak](#module_@lume/kiwi..Strength.weak)
+  - [.create(a, b, c, [w])](#module_@lume/kiwi..Strength.create) ⇒
 
-<a name="module_kiwi..Strength.required"></a>
+<a name="module_@lume/kiwi..Strength.required"></a>
 
 #### Strength.required
 
 The 'required' symbolic strength.
 
-**Kind**: static property of [<code>Strength</code>](#module_kiwi..Strength)  
-<a name="module_kiwi..Strength.strong"></a>
+**Kind**: static property of [<code>Strength</code>](#module_@lume/kiwi..Strength)  
+<a name="module_@lume/kiwi..Strength.strong"></a>
 
 #### Strength.strong
 
 The 'strong' symbolic strength.
 
-**Kind**: static property of [<code>Strength</code>](#module_kiwi..Strength)  
-<a name="module_kiwi..Strength.medium"></a>
+**Kind**: static property of [<code>Strength</code>](#module_@lume/kiwi..Strength)  
+<a name="module_@lume/kiwi..Strength.medium"></a>
 
 #### Strength.medium
 
 The 'medium' symbolic strength.
 
-**Kind**: static property of [<code>Strength</code>](#module_kiwi..Strength)  
-<a name="module_kiwi..Strength.weak"></a>
+**Kind**: static property of [<code>Strength</code>](#module_@lume/kiwi..Strength)  
+<a name="module_@lume/kiwi..Strength.weak"></a>
 
 #### Strength.weak
 
 The 'weak' symbolic strength.
 
-**Kind**: static property of [<code>Strength</code>](#module_kiwi..Strength)  
-<a name="module_kiwi..Strength.create"></a>
+**Kind**: static property of [<code>Strength</code>](#module_@lume/kiwi..Strength)  
+<a name="module_@lume/kiwi..Strength.create"></a>
 
 #### Strength.create(a, b, c, [w]) ⇒
 
 Create a new symbolic strength.
 
-**Kind**: static method of [<code>Strength</code>](#module_kiwi..Strength)  
+**Kind**: static method of [<code>Strength</code>](#module_@lume/kiwi..Strength)  
 **Returns**: strength
 
 | Param | Default        | Description |
@@ -330,24 +330,24 @@ Create a new symbolic strength.
 | c     |                | weak        |
 | [w]   | <code>1</code> | weight      |
 
-<a name="module_kiwi..Constraint"></a>
+<a name="module_@lume/kiwi..Constraint"></a>
 
-### kiwi~Constraint
+### @lume/kiwi~Constraint
 
 A linear constraint equation.
 
 A constraint equation is composed of an expression, an operator,
 and a strength. The RHS of the equation is implicitly zero.
 
-**Kind**: inner class of [<code>kiwi</code>](#module_kiwi)
+**Kind**: inner class of [<code>@lume/kiwi</code>](#module_@lume/kiwi)
 
-- [~Constraint](#module_kiwi..Constraint)
-  - [new Constraint(expression, operator, [rhs], [strength])](#new_module_kiwi..Constraint_new)
-  - [.expression()](#module_kiwi..Constraint+expression) ⇒ <code>Expression</code>
-  - [.op()](#module_kiwi..Constraint+op) ⇒ <code>Operator</code>
-  - [.strength()](#module_kiwi..Constraint+strength) ⇒ <code>Number</code>
+- [~Constraint](#module_@lume/kiwi..Constraint)
+  - [new Constraint(expression, operator, [rhs], [strength])](#new_module_@lume/kiwi..Constraint_new)
+  - [.expression()](#module_@lume/kiwi..Constraint+expression) ⇒ <code>Expression</code>
+  - [.op()](#module_@lume/kiwi..Constraint+op) ⇒ <code>Operator</code>
+  - [.strength()](#module_@lume/kiwi..Constraint+strength) ⇒ <code>Number</code>
 
-<a name="new_module_kiwi..Constraint_new"></a>
+<a name="new_module_@lume/kiwi..Constraint_new"></a>
 
 #### new Constraint(expression, operator, [rhs], [strength])
 
@@ -358,63 +358,63 @@ and a strength. The RHS of the equation is implicitly zero.
 | [rhs]      | <code>Expression</code> |                                | Right hand side of the expression. |
 | [strength] | <code>Number</code>     | <code>Strength.required</code> | The strength of the constraint.    |
 
-<a name="module_kiwi..Constraint+expression"></a>
+<a name="module_@lume/kiwi..Constraint+expression"></a>
 
 #### constraint.expression() ⇒ <code>Expression</code>
 
 Returns the expression of the constraint.
 
-**Kind**: instance method of [<code>Constraint</code>](#module_kiwi..Constraint)  
+**Kind**: instance method of [<code>Constraint</code>](#module_@lume/kiwi..Constraint)  
 **Returns**: <code>Expression</code> - expression  
-<a name="module_kiwi..Constraint+op"></a>
+<a name="module_@lume/kiwi..Constraint+op"></a>
 
 #### constraint.op() ⇒ <code>Operator</code>
 
 Returns the relational operator of the constraint.
 
-**Kind**: instance method of [<code>Constraint</code>](#module_kiwi..Constraint)  
+**Kind**: instance method of [<code>Constraint</code>](#module_@lume/kiwi..Constraint)  
 **Returns**: <code>Operator</code> - linear constraint operator  
-<a name="module_kiwi..Constraint+strength"></a>
+<a name="module_@lume/kiwi..Constraint+strength"></a>
 
 #### constraint.strength() ⇒ <code>Number</code>
 
 Returns the strength of the constraint.
 
-**Kind**: instance method of [<code>Constraint</code>](#module_kiwi..Constraint)  
+**Kind**: instance method of [<code>Constraint</code>](#module_@lume/kiwi..Constraint)  
 **Returns**: <code>Number</code> - strength  
-<a name="module_kiwi..Solver"></a>
+<a name="module_@lume/kiwi..Solver"></a>
 
-### kiwi~Solver
+### @lume/kiwi~Solver
 
 The constraint solver class.
 
-**Kind**: inner class of [<code>kiwi</code>](#module_kiwi)
+**Kind**: inner class of [<code>@lume/kiwi</code>](#module_@lume/kiwi)
 
-- [~Solver](#module_kiwi..Solver)
-  - [new Solver()](#new_module_kiwi..Solver_new)
-  - [.createConstraint(lhs, operator, rhs, [strength])](#module_kiwi..Solver+createConstraint)
-  - [.addConstraint(constraint)](#module_kiwi..Solver+addConstraint)
-  - [.removeConstraint(constraint)](#module_kiwi..Solver+removeConstraint)
-  - [.hasConstraint(constraint)](#module_kiwi..Solver+hasConstraint) ⇒ <code>Bool</code>
-  - [.addEditVariable(variable, strength)](#module_kiwi..Solver+addEditVariable)
-  - [.removeEditVariable(variable)](#module_kiwi..Solver+removeEditVariable)
-  - [.hasEditVariable(variable)](#module_kiwi..Solver+hasEditVariable) ⇒ <code>Bool</code>
-  - [.suggestValue(variable, value)](#module_kiwi..Solver+suggestValue)
-  - [.updateVariables()](#module_kiwi..Solver+updateVariables)
+- [~Solver](#module_@lume/kiwi..Solver)
+  - [new Solver()](#new_module_@lume/kiwi..Solver_new)
+  - [.createConstraint(lhs, operator, rhs, [strength])](#module_@lume/kiwi..Solver+createConstraint)
+  - [.addConstraint(constraint)](#module_@lume/kiwi..Solver+addConstraint)
+  - [.removeConstraint(constraint)](#module_@lume/kiwi..Solver+removeConstraint)
+  - [.hasConstraint(constraint)](#module_@lume/kiwi..Solver+hasConstraint) ⇒ <code>Bool</code>
+  - [.addEditVariable(variable, strength)](#module_@lume/kiwi..Solver+addEditVariable)
+  - [.removeEditVariable(variable)](#module_@lume/kiwi..Solver+removeEditVariable)
+  - [.hasEditVariable(variable)](#module_@lume/kiwi..Solver+hasEditVariable) ⇒ <code>Bool</code>
+  - [.suggestValue(variable, value)](#module_@lume/kiwi..Solver+suggestValue)
+  - [.updateVariables()](#module_@lume/kiwi..Solver+updateVariables)
 
-<a name="new_module_kiwi..Solver_new"></a>
+<a name="new_module_@lume/kiwi..Solver_new"></a>
 
 #### new Solver()
 
 Construct a new Solver.
 
-<a name="module_kiwi..Solver+createConstraint"></a>
+<a name="module_@lume/kiwi..Solver+createConstraint"></a>
 
 #### solver.createConstraint(lhs, operator, rhs, [strength])
 
 Creates and add a constraint to the solver.
 
-**Kind**: instance method of [<code>Solver</code>](#module_kiwi..Solver)
+**Kind**: instance method of [<code>Solver</code>](#module_@lume/kiwi..Solver)
 
 | Param      | Type                                                                    | Default                        | Description                       |
 | ---------- | ----------------------------------------------------------------------- | ------------------------------ | --------------------------------- |
@@ -423,104 +423,104 @@ Creates and add a constraint to the solver.
 | rhs        | <code>Expression</code> \| <code>Variable</code> \| <code>Number</code> |                                | Right hand side of the expression |
 | [strength] | <code>Number</code>                                                     | <code>Strength.required</code> | Strength                          |
 
-<a name="module_kiwi..Solver+addConstraint"></a>
+<a name="module_@lume/kiwi..Solver+addConstraint"></a>
 
 #### solver.addConstraint(constraint)
 
 Add a constraint to the solver.
 
-**Kind**: instance method of [<code>Solver</code>](#module_kiwi..Solver)
+**Kind**: instance method of [<code>Solver</code>](#module_@lume/kiwi..Solver)
 
 | Param      | Type                    | Description                     |
 | ---------- | ----------------------- | ------------------------------- |
 | constraint | <code>Constraint</code> | Constraint to add to the solver |
 
-<a name="module_kiwi..Solver+removeConstraint"></a>
+<a name="module_@lume/kiwi..Solver+removeConstraint"></a>
 
 #### solver.removeConstraint(constraint)
 
 Remove a constraint from the solver.
 
-**Kind**: instance method of [<code>Solver</code>](#module_kiwi..Solver)
+**Kind**: instance method of [<code>Solver</code>](#module_@lume/kiwi..Solver)
 
 | Param      | Type                    | Description                          |
 | ---------- | ----------------------- | ------------------------------------ |
 | constraint | <code>Constraint</code> | Constraint to remove from the solver |
 
-<a name="module_kiwi..Solver+hasConstraint"></a>
+<a name="module_@lume/kiwi..Solver+hasConstraint"></a>
 
 #### solver.hasConstraint(constraint) ⇒ <code>Bool</code>
 
 Test whether the solver contains the constraint.
 
-**Kind**: instance method of [<code>Solver</code>](#module_kiwi..Solver)  
+**Kind**: instance method of [<code>Solver</code>](#module_@lume/kiwi..Solver)  
 **Returns**: <code>Bool</code> - true or false
 
 | Param      | Type                    | Description            |
 | ---------- | ----------------------- | ---------------------- |
 | constraint | <code>Constraint</code> | Constraint to test for |
 
-<a name="module_kiwi..Solver+addEditVariable"></a>
+<a name="module_@lume/kiwi..Solver+addEditVariable"></a>
 
 #### solver.addEditVariable(variable, strength)
 
 Add an edit variable to the solver.
 
-**Kind**: instance method of [<code>Solver</code>](#module_kiwi..Solver)
+**Kind**: instance method of [<code>Solver</code>](#module_@lume/kiwi..Solver)
 
 | Param    | Type                  | Description                                       |
 | -------- | --------------------- | ------------------------------------------------- |
 | variable | <code>Variable</code> | Edit variable to add to the solver                |
 | strength | <code>Number</code>   | Strength, should be less than `Strength.required` |
 
-<a name="module_kiwi..Solver+removeEditVariable"></a>
+<a name="module_@lume/kiwi..Solver+removeEditVariable"></a>
 
 #### solver.removeEditVariable(variable)
 
 Remove an edit variable from the solver.
 
-**Kind**: instance method of [<code>Solver</code>](#module_kiwi..Solver)
+**Kind**: instance method of [<code>Solver</code>](#module_@lume/kiwi..Solver)
 
 | Param    | Type                  | Description                             |
 | -------- | --------------------- | --------------------------------------- |
 | variable | <code>Variable</code> | Edit variable to remove from the solver |
 
-<a name="module_kiwi..Solver+hasEditVariable"></a>
+<a name="module_@lume/kiwi..Solver+hasEditVariable"></a>
 
 #### solver.hasEditVariable(variable) ⇒ <code>Bool</code>
 
 Test whether the solver contains the edit variable.
 
-**Kind**: instance method of [<code>Solver</code>](#module_kiwi..Solver)  
+**Kind**: instance method of [<code>Solver</code>](#module_@lume/kiwi..Solver)  
 **Returns**: <code>Bool</code> - true or false
 
 | Param    | Type                  | Description               |
 | -------- | --------------------- | ------------------------- |
 | variable | <code>Variable</code> | Edit variable to test for |
 
-<a name="module_kiwi..Solver+suggestValue"></a>
+<a name="module_@lume/kiwi..Solver+suggestValue"></a>
 
 #### solver.suggestValue(variable, value)
 
 Suggest the value of an edit variable.
 
-**Kind**: instance method of [<code>Solver</code>](#module_kiwi..Solver)
+**Kind**: instance method of [<code>Solver</code>](#module_@lume/kiwi..Solver)
 
 | Param    | Type                  | Description                          |
 | -------- | --------------------- | ------------------------------------ |
 | variable | <code>Variable</code> | Edit variable to suggest a value for |
 | value    | <code>Number</code>   | Suggested value                      |
 
-<a name="module_kiwi..Solver+updateVariables"></a>
+<a name="module_@lume/kiwi..Solver+updateVariables"></a>
 
 #### solver.updateVariables()
 
 Update the values of the variables.
 
-**Kind**: instance method of [<code>Solver</code>](#module_kiwi..Solver)  
-<a name="module_kiwi..Operator"></a>
+**Kind**: instance method of [<code>Solver</code>](#module_@lume/kiwi..Solver)  
+<a name="module_@lume/kiwi..Operator"></a>
 
-### kiwi~Operator : <code>enum</code>
+### @lume/kiwi~Operator : <code>enum</code>
 
 An enum defining the linear constraint operators.
 
@@ -530,4 +530,4 @@ An enum defining the linear constraint operators.
 | `Ge`  | >=       | Greater than equal |
 | `Eq`  | ==       | Equal              |
 
-**Kind**: inner enum of [<code>kiwi</code>](#module_kiwi)
+**Kind**: inner enum of [<code>@lume/kiwi</code>](#module_@lume/kiwi)

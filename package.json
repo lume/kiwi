@@ -31,6 +31,7 @@
 		"chai": "^4.2.0",
 		"codecov": "^3.5.0",
 		"istanbul": "^0.4.5",
+		"jsdoc-to-markdown": "^4.0.1",
 		"mocha": "^6.2.0",
 		"prettier": "^2.3.0",
 		"rimraf": "^3.0.2",
@@ -38,18 +39,13 @@
 		"rollup-plugin-uglify": "6.0.2",
 		"typescript": "^3.5.3"
 	},
-	"// TODO for now we disabled jsdoc because it causes an error in LUME super-module's GitHub Actions": "",
-	"devDependenciesDisabled": {
-		"jsdoc": "3.6.1",
-		"jsdoc-to-markdown": "^5.0.0"
-	},
 	"scripts": {
 		"build": "tsc && tsc -t es6 --outDir tmp/es && rollup -c",
 		"clean": "rimraf lib/ es/ tmp/",
 		"test": "npm run lint && mocha",
 		"format": "prettier . --write",
 		"cov": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -R test/main",
-		"doc": "jsdoc2md -f tmp/kiwi.js -m none -g none > docs/Kiwi.md",
+		"doc": "jsdoc2md -f tmp/kiwi.js -m none -g none > docs/Kiwi.md && prettier docs/Kiwi.md --write",
 		"lint": "prettier . --check",
 		"bench": "node bench/main.js",
 		"prepare": "npm run build"
