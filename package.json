@@ -4,7 +4,7 @@
 	"homepage": "https://github.com/lume/kiwi",
 	"repository": "https://github.com/lume/kiwi",
 	"type": "module",
-	"main": "lib/kiwi.js",
+	"main": "es/kiwi.js",
 	"module": "es/kiwi.js",
 	"types": "es/kiwi.d.ts",
 	"description": "High speed Cassowary constraint solver in JavaScript.",

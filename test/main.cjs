@@ -11,7 +11,7 @@ describe('import kiwi', function () {
 	it('imports kiwi', async function () {
 		const kiwi = await getKiwi()
 
-		describe('kiwi', async function () {
+		describe('kiwi', function () {
 			it('create Solver', function () {
 				var solver = new kiwi.Solver()
 				assert(solver)
