@@ -7,7 +7,7 @@ var getKiwi = () => {
 	})
 }
 
-describe('import kiwi', async function () {
+describe('import kiwi', function () {
 	it('imports kiwi', async function () {
 		const kiwi = await getKiwi()
 
