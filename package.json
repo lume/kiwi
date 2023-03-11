@@ -1,8 +1,9 @@
 {
 	"name": "@lume/kiwi",
-	"version": "0.2.2",
+	"version": "0.2.1",
 	"homepage": "https://github.com/lume/kiwi",
 	"repository": "https://github.com/lume/kiwi",
+	"type": "module",
 	"main": "lib/kiwi.js",
 	"module": "es/kiwi.js",
 	"types": "es/kiwi.d.ts",
@@ -42,10 +43,11 @@
 	"scripts": {
 		"build": "tsc && tsc -t es6 --outDir tmp/es && rollup -c",
 		"clean": "rimraf lib/ es/ tmp/",
-		"test": "npm run lint && mocha",
+		"test": "npm run lint && mocha test/main.cjs",
 		"format": "prettier . --write",
-		"cov": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -R test/main",
-		"doc": "jsdoc2md -f tmp/kiwi.js -m none -g none > docs/Kiwi.md && prettier docs/Kiwi.md --write",
+		"// TODO cov script not currently collecting coverage information although it runs": "",
+		"cov": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -R test/main.cjs",
+		"doc": "jsdoc2md -f tmp/kiwi.js -m none -g none > docs/Kiwi.md && node scripts/docs-update-headings.js && prettier docs/Kiwi.md --write",
 		"lint": "prettier . --check",
 		"bench": "node bench/main.js",
 		"prepare": "npm run build"

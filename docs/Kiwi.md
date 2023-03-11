@@ -1,6 +1,6 @@
 <a name="module_@lume/kiwi"></a>
 
-## @lume/kiwi
+# @lume/kiwi
 
 Lume Kiwi is an efficient implementation of the Cassowary constraint solving
 algorithm, based on the seminal Cassowary paper.
@@ -40,7 +40,7 @@ solver.updateVariables();
 console.assert(centerX.value() === 250);
 ```
 
-## API Documentation
+# API Documentation
 
 - [@lume/kiwi](#module_@lume/kiwi)
   - [~Variable](#module_@lume/kiwi..Variable)
@@ -85,7 +85,7 @@ console.assert(centerX.value() === 250);
 
 <a name="module_@lume/kiwi..Variable"></a>
 
-### @lume/kiwi~Variable
+## @lume/kiwi~Variable
 
 The primary user constraint variable.
 
@@ -103,7 +103,7 @@ The primary user constraint variable.
 
 <a name="new_module_@lume/kiwi..Variable_new"></a>
 
-#### new Variable([name])
+### new Variable([name])
 
 | Param  | Type                | Default                   | Description                               |
 | ------ | ------------------- | ------------------------- | ----------------------------------------- |
@@ -111,7 +111,7 @@ The primary user constraint variable.
 
 <a name="module_@lume/kiwi..Variable+name"></a>
 
-#### variable.name() ⇒ <code>String</code>
+### variable.name() ⇒ <code>String</code>
 
 Returns the name of the variable.
 
@@ -119,7 +119,7 @@ Returns the name of the variable.
 **Returns**: <code>String</code> - name of the variable  
 <a name="module_@lume/kiwi..Variable+setName"></a>
 
-#### variable.setName(name)
+### variable.setName(name)
 
 Set the name of the variable.
 
@@ -131,7 +131,7 @@ Set the name of the variable.
 
 <a name="module_@lume/kiwi..Variable+value"></a>
 
-#### variable.value() ⇒ <code>Number</code>
+### variable.value() ⇒ <code>Number</code>
 
 Returns the value of the variable.
 
@@ -139,7 +139,7 @@ Returns the value of the variable.
 **Returns**: <code>Number</code> - Calculated value  
 <a name="module_@lume/kiwi..Variable+plus"></a>
 
-#### variable.plus(value) ⇒ <code>Expression</code>
+### variable.plus(value) ⇒ <code>Expression</code>
 
 Creates a new Expression by adding a number, variable or expression
 to the variable.
@@ -153,7 +153,7 @@ to the variable.
 
 <a name="module_@lume/kiwi..Variable+minus"></a>
 
-#### variable.minus(value) ⇒ <code>Expression</code>
+### variable.minus(value) ⇒ <code>Expression</code>
 
 Creates a new Expression by substracting a number, variable or expression
 from the variable.
@@ -167,7 +167,7 @@ from the variable.
 
 <a name="module_@lume/kiwi..Variable+multiply"></a>
 
-#### variable.multiply(coefficient) ⇒ <code>Expression</code>
+### variable.multiply(coefficient) ⇒ <code>Expression</code>
 
 Creates a new Expression by multiplying with a fixed number.
 
@@ -180,7 +180,7 @@ Creates a new Expression by multiplying with a fixed number.
 
 <a name="module_@lume/kiwi..Variable+divide"></a>
 
-#### variable.divide(coefficient) ⇒ <code>Expression</code>
+### variable.divide(coefficient) ⇒ <code>Expression</code>
 
 Creates a new Expression by dividing with a fixed number.
 
@@ -193,7 +193,7 @@ Creates a new Expression by dividing with a fixed number.
 
 <a name="module_@lume/kiwi..Expression"></a>
 
-### @lume/kiwi~Expression
+## @lume/kiwi~Expression
 
 An expression of variable terms and a constant.
 
@@ -218,7 +218,7 @@ The parameters are summed. The tuples are multiplied.
 
 <a name="new_module_@lume/kiwi..Expression_new"></a>
 
-#### new Expression(...args)
+### new Expression(...args)
 
 | Param   | Type                                                                                          |
 | ------- | --------------------------------------------------------------------------------------------- |
@@ -226,7 +226,7 @@ The parameters are summed. The tuples are multiplied.
 
 <a name="module_@lume/kiwi..Expression+plus"></a>
 
-#### expression.plus(value) ⇒ <code>Expression</code>
+### expression.plus(value) ⇒ <code>Expression</code>
 
 Creates a new Expression by adding a number, variable or expression
 to the expression.
@@ -240,7 +240,7 @@ to the expression.
 
 <a name="module_@lume/kiwi..Expression+minus"></a>
 
-#### expression.minus(value) ⇒ <code>Expression</code>
+### expression.minus(value) ⇒ <code>Expression</code>
 
 Creates a new Expression by substracting a number, variable or expression
 from the expression.
@@ -254,7 +254,7 @@ from the expression.
 
 <a name="module_@lume/kiwi..Expression+multiply"></a>
 
-#### expression.multiply(coefficient) ⇒ <code>Expression</code>
+### expression.multiply(coefficient) ⇒ <code>Expression</code>
 
 Creates a new Expression by multiplying with a fixed number.
 
@@ -267,7 +267,7 @@ Creates a new Expression by multiplying with a fixed number.
 
 <a name="module_@lume/kiwi..Expression+divide"></a>
 
-#### expression.divide(coefficient) ⇒ <code>Expression</code>
+### expression.divide(coefficient) ⇒ <code>Expression</code>
 
 Creates a new Expression by dividing with a fixed number.
 
@@ -280,7 +280,7 @@ Creates a new Expression by dividing with a fixed number.
 
 <a name="module_@lume/kiwi..Strength"></a>
 
-### @lume/kiwi~Strength
+## @lume/kiwi~Strength
 
 **Kind**: inner class of [<code>@lume/kiwi</code>](#module_@lume/kiwi)
 
@@ -293,35 +293,35 @@ Creates a new Expression by dividing with a fixed number.
 
 <a name="module_@lume/kiwi..Strength.required"></a>
 
-#### Strength.required
+### Strength.required
 
 The 'required' symbolic strength.
 
 **Kind**: static property of [<code>Strength</code>](#module_@lume/kiwi..Strength)  
 <a name="module_@lume/kiwi..Strength.strong"></a>
 
-#### Strength.strong
+### Strength.strong
 
 The 'strong' symbolic strength.
 
 **Kind**: static property of [<code>Strength</code>](#module_@lume/kiwi..Strength)  
 <a name="module_@lume/kiwi..Strength.medium"></a>
 
-#### Strength.medium
+### Strength.medium
 
 The 'medium' symbolic strength.
 
 **Kind**: static property of [<code>Strength</code>](#module_@lume/kiwi..Strength)  
 <a name="module_@lume/kiwi..Strength.weak"></a>
 
-#### Strength.weak
+### Strength.weak
 
 The 'weak' symbolic strength.
 
 **Kind**: static property of [<code>Strength</code>](#module_@lume/kiwi..Strength)  
 <a name="module_@lume/kiwi..Strength.create"></a>
 
-#### Strength.create(a, b, c, [w]) ⇒
+### Strength.create(a, b, c, [w]) ⇒
 
 Create a new symbolic strength.
 
@@ -337,7 +337,7 @@ Create a new symbolic strength.
 
 <a name="module_@lume/kiwi..Constraint"></a>
 
-### @lume/kiwi~Constraint
+## @lume/kiwi~Constraint
 
 A linear constraint equation.
 
@@ -354,7 +354,7 @@ and a strength. The RHS of the equation is implicitly zero.
 
 <a name="new_module_@lume/kiwi..Constraint_new"></a>
 
-#### new Constraint(expression, operator, [rhs], [strength])
+### new Constraint(expression, operator, [rhs], [strength])
 
 | Param      | Type                    | Default                        | Description                        |
 | ---------- | ----------------------- | ------------------------------ | ---------------------------------- |
@@ -365,7 +365,7 @@ and a strength. The RHS of the equation is implicitly zero.
 
 <a name="module_@lume/kiwi..Constraint+expression"></a>
 
-#### constraint.expression() ⇒ <code>Expression</code>
+### constraint.expression() ⇒ <code>Expression</code>
 
 Returns the expression of the constraint.
 
@@ -373,7 +373,7 @@ Returns the expression of the constraint.
 **Returns**: <code>Expression</code> - expression  
 <a name="module_@lume/kiwi..Constraint+op"></a>
 
-#### constraint.op() ⇒ <code>Operator</code>
+### constraint.op() ⇒ <code>Operator</code>
 
 Returns the relational operator of the constraint.
 
@@ -381,7 +381,7 @@ Returns the relational operator of the constraint.
 **Returns**: <code>Operator</code> - linear constraint operator  
 <a name="module_@lume/kiwi..Constraint+strength"></a>
 
-#### constraint.strength() ⇒ <code>Number</code>
+### constraint.strength() ⇒ <code>Number</code>
 
 Returns the strength of the constraint.
 
@@ -389,7 +389,7 @@ Returns the strength of the constraint.
 **Returns**: <code>Number</code> - strength  
 <a name="module_@lume/kiwi..Solver"></a>
 
-### @lume/kiwi~Solver
+## @lume/kiwi~Solver
 
 The constraint solver class.
 
@@ -410,20 +410,20 @@ The constraint solver class.
 
 <a name="new_module_@lume/kiwi..Solver_new"></a>
 
-#### new Solver()
+### new Solver()
 
 Construct a new Solver.
 
 <a name="module_@lume/kiwi..Solver+maxIterations"></a>
 
-#### solver.maxIterations : <code>number</code>
+### solver.maxIterations : <code>number</code>
 
 - The max number of solver iterations before an erroris thrown, in order to prevent infinite iteration. Default: `10,000`.
 
 **Kind**: instance property of [<code>Solver</code>](#module_@lume/kiwi..Solver)  
 <a name="module_@lume/kiwi..Solver+createConstraint"></a>
 
-#### solver.createConstraint(lhs, operator, rhs, [strength])
+### solver.createConstraint(lhs, operator, rhs, [strength])
 
 Creates and add a constraint to the solver.
 
@@ -438,7 +438,7 @@ Creates and add a constraint to the solver.
 
 <a name="module_@lume/kiwi..Solver+addConstraint"></a>
 
-#### solver.addConstraint(constraint)
+### solver.addConstraint(constraint)
 
 Add a constraint to the solver.
 
@@ -450,7 +450,7 @@ Add a constraint to the solver.
 
 <a name="module_@lume/kiwi..Solver+removeConstraint"></a>
 
-#### solver.removeConstraint(constraint)
+### solver.removeConstraint(constraint)
 
 Remove a constraint from the solver.
 
@@ -462,7 +462,7 @@ Remove a constraint from the solver.
 
 <a name="module_@lume/kiwi..Solver+hasConstraint"></a>
 
-#### solver.hasConstraint(constraint) ⇒ <code>Bool</code>
+### solver.hasConstraint(constraint) ⇒ <code>Bool</code>
 
 Test whether the solver contains the constraint.
 
@@ -475,7 +475,7 @@ Test whether the solver contains the constraint.
 
 <a name="module_@lume/kiwi..Solver+addEditVariable"></a>
 
-#### solver.addEditVariable(variable, strength)
+### solver.addEditVariable(variable, strength)
 
 Add an edit variable to the solver.
 
@@ -488,7 +488,7 @@ Add an edit variable to the solver.
 
 <a name="module_@lume/kiwi..Solver+removeEditVariable"></a>
 
-#### solver.removeEditVariable(variable)
+### solver.removeEditVariable(variable)
 
 Remove an edit variable from the solver.
 
@@ -500,7 +500,7 @@ Remove an edit variable from the solver.
 
 <a name="module_@lume/kiwi..Solver+hasEditVariable"></a>
 
-#### solver.hasEditVariable(variable) ⇒ <code>Bool</code>
+### solver.hasEditVariable(variable) ⇒ <code>Bool</code>
 
 Test whether the solver contains the edit variable.
 
@@ -513,7 +513,7 @@ Test whether the solver contains the edit variable.
 
 <a name="module_@lume/kiwi..Solver+suggestValue"></a>
 
-#### solver.suggestValue(variable, value)
+### solver.suggestValue(variable, value)
 
 Suggest the value of an edit variable.
 
@@ -526,14 +526,14 @@ Suggest the value of an edit variable.
 
 <a name="module_@lume/kiwi..Solver+updateVariables"></a>
 
-#### solver.updateVariables()
+### solver.updateVariables()
 
 Update the values of the variables.
 
 **Kind**: instance method of [<code>Solver</code>](#module_@lume/kiwi..Solver)  
 <a name="module_@lume/kiwi..Operator"></a>
 
-### @lume/kiwi~Operator : <code>enum</code>
+## @lume/kiwi~Operator : <code>enum</code>
 
 An enum defining the linear constraint operators.
 
