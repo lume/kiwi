@@ -6,7 +6,8 @@
 		"noImplicitAny": true,
 		"outDir": "es",
 		"declaration": true,
-		"declarationMap": true
+		"declarationMap": true,
+		"types": []
 	},
 	"include": ["src/*.ts"]
 }
