@@ -1,9 +1,7 @@
 .vscode
 node_modules
 tmp/
-es/
 /coverage
-lib/
 
 *.lock
 *lock.json

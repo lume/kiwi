@@ -49,7 +49,6 @@
 		"cov": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -R test/main.cjs",
 		"doc": "jsdoc2md -f tmp/kiwi.js -m none -g none > docs/Kiwi.md && node scripts/docs-update-headings.js && prettier docs/Kiwi.md --write",
 		"lint": "prettier . --check",
-		"bench": "node bench/main.cjs",
-		"prepare": "npm run build"
+		"bench": "node bench/main.cjs"
 	}
 }
