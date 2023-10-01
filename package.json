@@ -49,6 +49,10 @@
 		"cov": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -R test/main.cjs",
 		"doc": "jsdoc2md -f tmp/kiwi.js -m none -g none > docs/Kiwi.md && node scripts/docs-update-headings.js && prettier docs/Kiwi.md --write",
 		"lint": "prettier . --check",
-		"bench": "node bench/main.cjs"
+		"bench": "node bench/main.cjs",
+		"version": "npm run clean && npm run build && npm test && npm run bench",
+		"release:patch": "npm version patch -m 'v%s' && npm publish && git push --follow-tags",
+		"release:minor": "npm version minor -m 'v%s' && npm publish && git push --follow-tags",
+		"release:major": "npm version major -m 'v%s' && npm publish && git push --follow-tags"
 	}
 }
