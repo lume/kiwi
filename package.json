@@ -1,6 +1,6 @@
 {
 	"name": "@lume/kiwi",
-	"version": "0.3.2",
+	"version": "0.3.3",
 	"homepage": "https://github.com/lume/kiwi",
 	"repository": "https://github.com/lume/kiwi",
 	"type": "module",
