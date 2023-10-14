@@ -34,7 +34,7 @@
 		"istanbul": "^0.4.5",
 		"jsdoc-to-markdown": "^4.0.1",
 		"mocha": "^6.2.0",
-		"prettier": "^2.3.0",
+		"prettier": "3.0.3",
 		"rimraf": "^3.0.2",
 		"rollup": "1.17.0",
 		"rollup-plugin-uglify": "6.0.2",
