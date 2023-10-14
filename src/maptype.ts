@@ -137,7 +137,10 @@ class Pair<T, U> {
 	 * @param first The first item of the pair.
 	 * @param second The second item of the pair.
 	 */
-	constructor(public first: T, public second: U) {}
+	constructor(
+		public first: T,
+		public second: U,
+	) {}
 
 	/**
 	 * Create a copy of the pair.
