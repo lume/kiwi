@@ -1,21 +1,15 @@
 /*global module:false*/
 /*eslint strict:false, quotes: [2, "single"] */
 
-var assert = typeof window === 'undefined' ? require('assert') : window.chai.assert
-var _ = typeof window === 'undefined' ? require('lodash') : window._
-var Platform = typeof window === 'undefined' ? require('platform') : window.Platform
-var Benchmark = typeof window === 'undefined' ? require('benchmark') : window.Benchmark
-var c = typeof window === 'undefined' ? require('cassowary') : window.c // cassowary
-
-var getKiwi = () => {
-	return new Promise(resolve => {
-		typeof window === 'undefined' ? resolve(import('../es/kiwi.js')) : resolve(window.kiwi)
-	})
-}
+var assert = typeof window === 'undefined' ? (await import('assert')).default : window.chai.assert
+var _ = typeof window === 'undefined' ? (await import('lodash')).default : window._
+var Platform = typeof window === 'undefined' ? (await import('platform')).default : window.Platform
+var Benchmark = typeof window === 'undefined' ? (await import('benchmark')).default : window.Benchmark
+var c = typeof window === 'undefined' ? (await import('cassowary')).default : window.c // cassowary
 
 main()
 async function main() {
-	const kiwi = await getKiwi()
+	const kiwi = await import('@lume/kiwi')
 
 	var logElement
 	function log(message) {
@@ -28,7 +22,7 @@ async function main() {
 
 	function createKiwiSolver() {
 		var solver = new kiwi.Solver()
-		var strength = new kiwi.Strength.create(0, 900, 1000)
+		var strength = kiwi.Strength.create(0, 900, 1000)
 
 		// super-view
 		var superView = {
@@ -177,7 +171,7 @@ async function main() {
 
 	function createKiwiSolverNewAPI() {
 		var solver = new kiwi.Solver()
-		var strength = new kiwi.Strength.create(0, 900, 1000)
+		var strength = kiwi.Strength.create(0, 900, 1000)
 
 		// super-view
 		var superView = {

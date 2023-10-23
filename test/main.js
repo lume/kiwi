@@ -1,15 +1,9 @@
 /*global describe, it*/
-var assert = typeof window === 'undefined' ? require('assert') : window.chai.assert
-
-var getKiwi = () => {
-	return new Promise(resolve => {
-		typeof window === 'undefined' ? resolve(import('../es/kiwi.js')) : resolve(window.kiwi)
-	})
-}
+var assert = typeof window === 'undefined' ? (await import('assert')).default : window.chai.assert
 
 describe('import kiwi', function () {
 	it('imports kiwi', async function () {
-		const kiwi = await getKiwi()
+		const kiwi = await import('@lume/kiwi')
 
 		describe('kiwi', function () {
 			it('create Solver', function () {

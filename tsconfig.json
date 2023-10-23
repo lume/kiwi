@@ -1,10 +1,11 @@
 {
 	"compilerOptions": {
-		"target": "ES5",
-		"module": "es2015",
+		"target": "esnext",
+		"module": "esnext",
+		"newLine": "lf",
 		//"strict": true, // aah: currently fails to build in strict mode, as previous build only specified noImplicitAny
 		"noImplicitAny": true,
-		"outDir": "es",
+		"outDir": "dist",
 		"declaration": true,
 		"declarationMap": true,
 		"types": []

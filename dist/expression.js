@@ -15,9 +15,9 @@ import { Variable } from './variable.js';
  * @class
  * @param {...(number|Variable|Expression|Array)} args
  */
-var Expression = /** @class */ (function () {
-    function Expression() {
-        var parsed = parseArgs(arguments);
+export class Expression {
+    constructor() {
+        let parsed = parseArgs(arguments);
         this._terms = parsed.terms;
         this._constant = parsed.constant;
     }
@@ -27,30 +27,30 @@ var Expression = /** @class */ (function () {
      * This *must* be treated as const.
      * @private
      */
-    Expression.prototype.terms = function () {
+    terms() {
         return this._terms;
-    };
+    }
     /**
      * Returns the constant of the expression.
      * @private
      */
-    Expression.prototype.constant = function () {
+    constant() {
         return this._constant;
-    };
+    }
     /**
      * Returns the computed value of the expression.
      *
      * @private
      * @return {Number} computed value of the expression
      */
-    Expression.prototype.value = function () {
-        var result = this._constant;
-        for (var i = 0, n = this._terms.size(); i < n; i++) {
-            var pair = this._terms.itemAt(i);
+    value() {
+        let result = this._constant;
+        for (let i = 0, n = this._terms.size(); i < n; i++) {
+            let pair = this._terms.itemAt(i);
             result += pair.first.value() * pair.second;
         }
         return result;
-    };
+    }
     /**
      * Creates a new Expression by adding a number, variable or expression
      * to the expression.
@@ -58,9 +58,9 @@ var Expression = /** @class */ (function () {
      * @param {Number|Variable|Expression} value Value to add.
      * @return {Expression} expression
      */
-    Expression.prototype.plus = function (value) {
+    plus(value) {
         return new Expression(this, value);
-    };
+    }
     /**
      * Creates a new Expression by substracting a number, variable or expression
      * from the expression.
@@ -68,32 +68,32 @@ var Expression = /** @class */ (function () {
      * @param {Number|Variable|Expression} value Value to substract.
      * @return {Expression} expression
      */
-    Expression.prototype.minus = function (value) {
+    minus(value) {
         return new Expression(this, typeof value === 'number' ? -value : [-1, value]);
-    };
+    }
     /**
      * Creates a new Expression by multiplying with a fixed number.
      *
      * @param {Number} coefficient Coefficient to multiply with.
      * @return {Expression} expression
      */
-    Expression.prototype.multiply = function (coefficient) {
+    multiply(coefficient) {
         return new Expression([coefficient, this]);
-    };
+    }
     /**
      * Creates a new Expression by dividing with a fixed number.
      *
      * @param {Number} coefficient Coefficient to divide by.
      * @return {Expression} expression
      */
-    Expression.prototype.divide = function (coefficient) {
+    divide(coefficient) {
         return new Expression([1 / coefficient, this]);
-    };
-    Expression.prototype.isConstant = function () {
+    }
+    isConstant() {
         return this._terms.size() == 0;
-    };
-    Expression.prototype.toString = function () {
-        var result = this._terms.array
+    }
+    toString() {
+        let result = this._terms.array
             .map(function (pair) {
             return pair.second + '*' + pair.first.toString();
         })
@@ -103,20 +103,20 @@ var Expression = /** @class */ (function () {
         }
         result += this._constant;
         return result;
-    };
-    return Expression;
-}());
-export { Expression };
+    }
+    _terms;
+    _constant;
+}
 /**
  * An internal argument parsing function.
  * @private
  */
 function parseArgs(args) {
-    var constant = 0.0;
-    var factory = function () { return 0.0; };
-    var terms = createMap();
-    for (var i = 0, n = args.length; i < n; ++i) {
-        var item = args[i];
+    let constant = 0.0;
+    let factory = () => 0.0;
+    let terms = createMap();
+    for (let i = 0, n = args.length; i < n; ++i) {
+        let item = args[i];
         if (typeof item === 'number') {
             constant += item;
         }
@@ -125,9 +125,9 @@ function parseArgs(args) {
         }
         else if (item instanceof Expression) {
             constant += item.constant();
-            var terms2 = item.terms();
-            for (var j = 0, k = terms2.size(); j < k; j++) {
-                var termPair = terms2.itemAt(j);
+            let terms2 = item.terms();
+            for (let j = 0, k = terms2.size(); j < k; j++) {
+                let termPair = terms2.itemAt(j);
                 terms.setDefault(termPair.first, factory).second += termPair.second;
             }
         }
@@ -135,8 +135,8 @@ function parseArgs(args) {
             if (item.length !== 2) {
                 throw new Error('array must have length 2');
             }
-            var value = item[0];
-            var value2 = item[1];
+            let value = item[0];
+            let value2 = item[1];
             if (typeof value !== 'number') {
                 throw new Error('array item 0 must be a number');
             }
@@ -145,9 +145,9 @@ function parseArgs(args) {
             }
             else if (value2 instanceof Expression) {
                 constant += value2.constant() * value;
-                var terms2 = value2.terms();
-                for (var j = 0, k = terms2.size(); j < k; j++) {
-                    var termPair = terms2.itemAt(j);
+                let terms2 = value2.terms();
+                for (let j = 0, k = terms2.size(); j < k; j++) {
+                    let termPair = terms2.itemAt(j);
                     terms.setDefault(termPair.first, factory).second += termPair.second * value;
                 }
             }
@@ -159,5 +159,5 @@ function parseArgs(args) {
             throw new Error('invalid Expression argument: ' + item);
         }
     }
-    return { terms: terms, constant: constant };
+    return { terms, constant };
 }

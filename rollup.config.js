@@ -1,6 +1,4 @@
-import {uglify} from 'rollup-plugin-uglify'
-
-const license = `
+const license = /*js*/ `
 /*-----------------------------------------------------------------------------
 | Copyright (c) 2014-2019, Nucleic Development Team & H. Rutjes & Lume.
 |
@@ -11,7 +9,7 @@ const license = `
 `,
 	banner =
 		license +
-		`
+		/*js*/ `
 /**
  * Lume Kiwi is an efficient implementation of the Cassowary constraint solving
  * algorithm, based on the seminal Cassowary paper.
@@ -55,45 +53,18 @@ const license = `
  * @module @lume/kiwi
  */
 `
-
 // we generate three output formats:
-// - UMD in lib/kiwi.js
-// - minified UMD in lib/kiwi.min.js
-// - a fully ES6 version in tmp/kiwi.js, used just as the input to jsdoc2md, as we have
-//   Typescript set to down-compile the others to ES5 for max compatibility, but
-//   Typescript's ES5-polyfills confuse jsdoc2md.
+// - a fully ES6 version in tmp/kiwi.js, used just as the input to jsdoc2md.
 
-const umd = {
-	input: 'es/kiwi.js',
+const doc = {
+	input: 'dist/kiwi.js',
 	output: {
-		file: 'lib/kiwi.js',
-		format: 'umd',
 		name: 'kiwi',
 		exports: 'named',
 		banner,
-	},
-}
-const minified = {
-	...umd,
-	output: {
-		...umd.output,
-		file: 'lib/kiwi.min.js',
-	},
-	plugins: [
-		uglify({
-			output: {
-				preamble: license,
-			},
-		}),
-	],
-}
-const doc = {
-	input: 'tmp/es/kiwi.js',
-	output: {
-		...umd.output,
 		file: 'tmp/kiwi.js',
 		format: 'es',
 	},
 }
 
-export default [umd, minified, doc]
+export default [doc]

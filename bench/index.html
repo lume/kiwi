@@ -2,6 +2,13 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Benchmark Tests</title>
+		<script type="importmap">
+			{
+				"imports": {
+					"@lume/kiwi": "../dist/kiwi.js"
+				}
+			}
+		</script>
 	</head>
 	<body>
 		<pre id="log" style="font-size: 16px"></pre>
@@ -13,7 +20,8 @@
 			type="text/javascript"
 			src="https://rawcdn.githack.com/slightlyoff/cassowary.js/68f82a0a9c365701a1cba8d929c5c7be097cd716/bin/c.min.js"
 		></script>
-		<script type="text/javascript" src="../lib/kiwi.js"></script>
-		<script type="text/javascript" src="./main.cjs"></script>
+		<script type="module">
+			import './main.js'
+		</script>
 	</body>
 </html>

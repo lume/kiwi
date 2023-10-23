@@ -1,4 +1,3 @@
 tmp/
-es/
+dist/
 /coverage
-lib/

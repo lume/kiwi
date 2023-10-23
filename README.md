@@ -13,12 +13,13 @@ compiler).
 
 ## Index
 
-- [Getting started](#getting-started)
+- [Install](#install)
+- [Usage](#usage)
 - [Documentation](#documentation)
 - [Benchmarks](#benchmarks)
 - [Tests](#tests)
 
-## Getting started
+## Install
 
 Install using NPM:
 
@@ -26,18 +27,7 @@ Install using NPM:
 npm install @lume/kiwi
 ```
 
-then either load `kiwi` as a global variable using a script tag,
-
-```html
-<script src="/node_modules/kiwi/lib/kiwi.js"></script>
-<script>
-  console.log(kiwi)
-
-  // ...use kiwi...
-</script>
-```
-
-or import it into your ES Module script:
+then import it into your project:
 
 ```js
 import * as kiwi from '@lume/kiwi'
@@ -46,6 +36,23 @@ console.log(kiwi)
 
 // ...use kiwi...
 ```
+
+If you have a plain web app with no build, or a non-browser JS runtime that also
+supports import maps like Deno, you'll need to add `@lume/kiwi` to your
+`importmap` script so that the browser knows where to import kiwi from. F.e.
+something like this:
+
+```html
+<script type="importmap">
+  {
+    "imports": {
+      "@lume/kiwi": "./node_modules/@lume/kiwi/dist/kiwi.js"
+    }
+  }
+</script>
+```
+
+## Usage
 
 The following example creates a solver which automatically calculates a width based on some constraints:
 
@@ -84,6 +91,24 @@ To run the benchmark locally using nodejs, _clone or download this repository_ a
     npm install
     npm run bench
 
+Statically serve the project, f.e. `npx five-server .` which opens a new browser
+tab, then visit `/bench/index.html` to verify that the benchmark also runs in a
+browser.
+
+Sample result output:
+
+```
+----- Running creation benchmark...
+Cassowary.js x 2,597 ops/sec ±1.56% (93 runs sampled)
+kiwi x 26,243 ops/sec ±1.34% (91 runs sampled)
+kiwi new API x 20,840 ops/sec ±7.19% (80 runs sampled)
+Fastest is kiwi (± 10.11x faster)
+----- Running solving benchmark...
+Cassowary.js x 260,002 ops/sec ±2.62% (89 runs sampled)
+kiwi x 595,455 ops/sec ±1.74% (89 runs sampled)
+Fastest is kiwi (± 2.29x faster)
+```
+
 ## Tests
 
 To run the tests in the browser, [just visit this page](https://rawgit.com/IjzerenHein/kiwi/master/test/index.html).
@@ -93,16 +118,20 @@ To run the tests locally using nodejs, _clone or download this repository_ and e
     npm install
     npm run build && npm run test
 
+Start a static server, f.e. `npx five-server .` which opens a new browser tab,
+and visit `/test/index.html` to verify that tests also pass in a browser.
+
 ## Contribute
 
-If you like this project and want to support it, show some love
-and give it a star.
+If you like this project and want to support it, show some love and give it a
+star, try it and report any bugs, write new feature ideas, or even
+open a pull request!
 
 ## License
 
 © 2013 Nucleic Development Team
 © 2021 Joseph Orbegoso Pea (http://github.com/trusktr)
-© 2021 LUME
+© 2021 Lume
 
 [![License](https://img.shields.io/badge/license-BDS%203--clause-brightgreen)](<https://tldrlegal.com/license/bsd-3-clause-license-(revised)>)
 

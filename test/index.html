@@ -3,17 +3,23 @@
 		<meta charset="utf-8" />
 		<title>Mocha Tests</title>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.2.5/mocha.min.css" />
+		<script type="importmap">
+			{
+				"imports": {
+					"@lume/kiwi": "../dist/kiwi.js"
+				}
+			}
+		</script>
 	</head>
 	<body>
 		<div id="mocha"></div>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/chai/3.0.0/chai.min.js"></script>
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mocha/2.2.5/mocha.min.js"></script>
-		<script>
+		<script type="module">
 			mocha.setup('bdd')
-		</script>
-		<script type="text/javascript" src="../lib/kiwi.js"></script>
-		<script type="text/javascript" src="./main.cjs"></script>
-		<script>
+
+			await import('./main.js')
+
 			mocha.checkLeaks()
 			mocha.run()
 		</script>

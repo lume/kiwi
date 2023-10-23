@@ -59,11 +59,13 @@ console.assert(centerX.value() === 250)
     - [.multiply(coefficient)](#module_@lume/kiwi..Expression+multiply) ⇒ <code>Expression</code>
     - [.divide(coefficient)](#module_@lume/kiwi..Expression+divide) ⇒ <code>Expression</code>
   - [~Strength](#module_@lume/kiwi..Strength)
-    - [.required](#module_@lume/kiwi..Strength.required)
-    - [.strong](#module_@lume/kiwi..Strength.strong)
-    - [.medium](#module_@lume/kiwi..Strength.medium)
-    - [.weak](#module_@lume/kiwi..Strength.weak)
-    - [.create(a, b, c, [w])](#module_@lume/kiwi..Strength.create) ⇒
+    - _instance_
+      - [.required](#module_@lume/kiwi..Strength+required)
+      - [.strong](#module_@lume/kiwi..Strength+strong)
+      - [.medium](#module_@lume/kiwi..Strength+medium)
+      - [.weak](#module_@lume/kiwi..Strength+weak)
+    - _static_
+      - [.create(a, b, c, [w])](#module_@lume/kiwi..Strength.create) ⇒
   - [~Constraint](#module_@lume/kiwi..Constraint)
     - [new Constraint(expression, operator, [rhs], [strength])](#new_module_@lume/kiwi..Constraint_new)
     - [.expression()](#module_@lume/kiwi..Constraint+expression) ⇒ <code>Expression</code>
@@ -285,40 +287,42 @@ Creates a new Expression by dividing with a fixed number.
 **Kind**: inner class of [<code>@lume/kiwi</code>](#module_@lume/kiwi)
 
 - [~Strength](#module_@lume/kiwi..Strength)
-  - [.required](#module_@lume/kiwi..Strength.required)
-  - [.strong](#module_@lume/kiwi..Strength.strong)
-  - [.medium](#module_@lume/kiwi..Strength.medium)
-  - [.weak](#module_@lume/kiwi..Strength.weak)
-  - [.create(a, b, c, [w])](#module_@lume/kiwi..Strength.create) ⇒
+  - _instance_
+    - [.required](#module_@lume/kiwi..Strength+required)
+    - [.strong](#module_@lume/kiwi..Strength+strong)
+    - [.medium](#module_@lume/kiwi..Strength+medium)
+    - [.weak](#module_@lume/kiwi..Strength+weak)
+  - _static_
+    - [.create(a, b, c, [w])](#module_@lume/kiwi..Strength.create) ⇒
 
-<a name="module_@lume/kiwi..Strength.required"></a>
+<a name="module_@lume/kiwi..Strength+required"></a>
 
-### Strength.required
+### strength.required
 
 The 'required' symbolic strength.
 
-**Kind**: static property of [<code>Strength</code>](#module_@lume/kiwi..Strength)  
-<a name="module_@lume/kiwi..Strength.strong"></a>
+**Kind**: instance property of [<code>Strength</code>](#module_@lume/kiwi..Strength)  
+<a name="module_@lume/kiwi..Strength+strong"></a>
 
-### Strength.strong
+### strength.strong
 
 The 'strong' symbolic strength.
 
-**Kind**: static property of [<code>Strength</code>](#module_@lume/kiwi..Strength)  
-<a name="module_@lume/kiwi..Strength.medium"></a>
+**Kind**: instance property of [<code>Strength</code>](#module_@lume/kiwi..Strength)  
+<a name="module_@lume/kiwi..Strength+medium"></a>
 
-### Strength.medium
+### strength.medium
 
 The 'medium' symbolic strength.
 
-**Kind**: static property of [<code>Strength</code>](#module_@lume/kiwi..Strength)  
-<a name="module_@lume/kiwi..Strength.weak"></a>
+**Kind**: instance property of [<code>Strength</code>](#module_@lume/kiwi..Strength)  
+<a name="module_@lume/kiwi..Strength+weak"></a>
 
-### Strength.weak
+### strength.weak
 
 The 'weak' symbolic strength.
 
-**Kind**: static property of [<code>Strength</code>](#module_@lume/kiwi..Strength)  
+**Kind**: instance property of [<code>Strength</code>](#module_@lume/kiwi..Strength)  
 <a name="module_@lume/kiwi..Strength.create"></a>
 
 ### Strength.create(a, b, c, [w]) ⇒

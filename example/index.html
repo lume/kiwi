@@ -1,8 +1,19 @@
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<script src="lib/kiwi.js"></script>
-		<script>
+		<title>Sample</title>
+		<script type="importmap">
+			{
+				"imports": {
+					"@lume/kiwi": "../dist/kiwi.js"
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<script type="module">
+			import * as kiwi from '@lume/kiwi'
+
 			var x1 = new kiwi.Variable()
 			var x2 = new kiwi.Variable()
 			var x3 = new kiwi.Variable()
@@ -18,7 +29,7 @@
 			solver.addConstraint(c2)
 			solver.addEditVariable(x2, kiwi.Strength.strong)
 
-			function doit() {
+			window.doit = function doit() {
 				console.time('elapsed')
 				for (var i = 0; i < 1000000; ++i) {
 					solver.suggestValue(x2, i)
@@ -30,9 +41,7 @@
 				console.log('x3', x3.value())
 			}
 		</script>
-		<title>Sample</title>
-	</head>
-	<body>
+
 		<button type="button" onclick="doit()">Do It!</button>
 	</body>
 </html>

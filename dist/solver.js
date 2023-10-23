@@ -7,25 +7,16 @@ import { Strength } from './strength.js';
  *
  * @class
  */
-var Solver = /** @class */ (function () {
+export class Solver {
+    /**
+     * @type {number} - The max number of solver iterations before an error
+     * is thrown, in order to prevent infinite iteration. Default: `10,000`.
+     */
+    maxIterations = 1000;
     /**
      * Construct a new Solver.
      */
-    function Solver() {
-        /**
-         * @type {number} - The max number of solver iterations before an error
-         * is thrown, in order to prevent infinite iteration. Default: `10,000`.
-         */
-        this.maxIterations = 1000;
-        this._cnMap = createCnMap();
-        this._rowMap = createRowMap();
-        this._varMap = createVarMap();
-        this._editMap = createEditMap();
-        this._infeasibleRows = [];
-        this._objective = new Row();
-        this._artificial = null;
-        this._idTick = 0;
-    }
+    constructor() { }
     /**
      * Creates and add a constraint to the solver.
      *
@@ -34,19 +25,18 @@ var Solver = /** @class */ (function () {
      * @param {Expression|Variable|Number} rhs Right hand side of the expression
      * @param {Number} [strength=Strength.required] Strength
      */
-    Solver.prototype.createConstraint = function (lhs, operator, rhs, strength) {
-        if (strength === void 0) { strength = Strength.required; }
-        var cn = new Constraint(lhs, operator, rhs, strength);
+    createConstraint(lhs, operator, rhs, strength = Strength.required) {
+        let cn = new Constraint(lhs, operator, rhs, strength);
         this.addConstraint(cn);
         return cn;
-    };
+    }
     /**
      * Add a constraint to the solver.
      *
      * @param {Constraint} constraint Constraint to add to the solver
      */
-    Solver.prototype.addConstraint = function (constraint) {
-        var cnPair = this._cnMap.find(constraint);
+    addConstraint(constraint) {
+        let cnPair = this._cnMap.find(constraint);
         if (cnPair !== undefined) {
             throw new Error('duplicate constraint');
         }
@@ -56,10 +46,10 @@ var Solver = /** @class */ (function () {
         // Since its likely that those variables will be used in other
         // constraints and since exceptional conditions are uncommon,
         // i'm not too worried about aggressive cleanup of the var map.
-        var data = this._createRow(constraint);
-        var row = data.row;
-        var tag = data.tag;
-        var subject = this._chooseSubject(row, tag);
+        let data = this._createRow(constraint);
+        let row = data.row;
+        let tag = data.tag;
+        let subject = this._chooseSubject(row, tag);
         // If chooseSubject couldnt find a valid entering symbol, one
         // last option is available if the entire row is composed of
         // dummy variables. If the constant of the row is zero, then
@@ -92,14 +82,14 @@ var Solver = /** @class */ (function () {
         // aggregate work due to a smaller average system size. It
         // also ensures the solver remains in a consistent state.
         this._optimize(this._objective);
-    };
+    }
     /**
      * Remove a constraint from the solver.
      *
      * @param {Constraint} constraint Constraint to remove from the solver
      */
-    Solver.prototype.removeConstraint = function (constraint) {
-        var cnPair = this._cnMap.erase(constraint);
+    removeConstraint(constraint) {
+        let cnPair = this._cnMap.erase(constraint);
         if (cnPair === undefined) {
             throw new Error('unknown constraint');
         }
@@ -109,10 +99,10 @@ var Solver = /** @class */ (function () {
         this._removeConstraintEffects(constraint, cnPair.second);
         // If the marker is basic, simply drop the row. Otherwise,
         // pivot the marker into the basis and then drop the row.
-        var marker = cnPair.second.marker;
-        var rowPair = this._rowMap.erase(marker);
+        let marker = cnPair.second.marker;
+        let rowPair = this._rowMap.erase(marker);
         if (rowPair === undefined) {
-            var leaving = this._getMarkerLeavingSymbol(marker);
+            let leaving = this._getMarkerLeavingSymbol(marker);
             if (leaving.type() === SymbolType.Invalid) {
                 throw new Error('failed to find leaving row');
             }
@@ -124,24 +114,24 @@ var Solver = /** @class */ (function () {
         // solver remains consistent. It makes the solver api easier to
         // use at a small tradeoff for speed.
         this._optimize(this._objective);
-    };
+    }
     /**
      * Test whether the solver contains the constraint.
      *
      * @param {Constraint} constraint Constraint to test for
      * @return {Bool} true or false
      */
-    Solver.prototype.hasConstraint = function (constraint) {
+    hasConstraint(constraint) {
         return this._cnMap.contains(constraint);
-    };
+    }
     /**
      * Add an edit variable to the solver.
      *
      * @param {Variable} variable Edit variable to add to the solver
      * @param {Number} strength Strength, should be less than `Strength.required`
      */
-    Solver.prototype.addEditVariable = function (variable, strength) {
-        var editPair = this._editMap.find(variable);
+    addEditVariable(variable, strength) {
+        let editPair = this._editMap.find(variable);
         if (editPair !== undefined) {
             throw new Error('duplicate edit variable');
         }
@@ -149,52 +139,52 @@ var Solver = /** @class */ (function () {
         if (strength === Strength.required) {
             throw new Error('bad required strength');
         }
-        var expr = new Expression(variable);
-        var cn = new Constraint(expr, Operator.Eq, undefined, strength);
+        let expr = new Expression(variable);
+        let cn = new Constraint(expr, Operator.Eq, undefined, strength);
         this.addConstraint(cn);
-        var tag = this._cnMap.find(cn).second;
-        var info = { tag: tag, constraint: cn, constant: 0.0 };
+        let tag = this._cnMap.find(cn).second;
+        let info = { tag, constraint: cn, constant: 0.0 };
         this._editMap.insert(variable, info);
-    };
+    }
     /**
      * Remove an edit variable from the solver.
      *
      * @param {Variable} variable Edit variable to remove from the solver
      */
-    Solver.prototype.removeEditVariable = function (variable) {
-        var editPair = this._editMap.erase(variable);
+    removeEditVariable(variable) {
+        let editPair = this._editMap.erase(variable);
         if (editPair === undefined) {
             throw new Error('unknown edit variable');
         }
         this.removeConstraint(editPair.second.constraint);
-    };
+    }
     /**
      * Test whether the solver contains the edit variable.
      *
      * @param {Variable} variable Edit variable to test for
      * @return {Bool} true or false
      */
-    Solver.prototype.hasEditVariable = function (variable) {
+    hasEditVariable(variable) {
         return this._editMap.contains(variable);
-    };
+    }
     /**
      * Suggest the value of an edit variable.
      *
      * @param {Variable} variable Edit variable to suggest a value for
      * @param {Number} value Suggested value
      */
-    Solver.prototype.suggestValue = function (variable, value) {
-        var editPair = this._editMap.find(variable);
+    suggestValue(variable, value) {
+        let editPair = this._editMap.find(variable);
         if (editPair === undefined) {
             throw new Error('unknown edit variable');
         }
-        var rows = this._rowMap;
-        var info = editPair.second;
-        var delta = value - info.constant;
+        let rows = this._rowMap;
+        let info = editPair.second;
+        let delta = value - info.constant;
         info.constant = value;
         // Check first if the positive error variable is basic.
-        var marker = info.tag.marker;
-        var rowPair = rows.find(marker);
+        let marker = info.tag.marker;
+        let rowPair = rows.find(marker);
         if (rowPair !== undefined) {
             if (rowPair.second.add(-delta) < 0.0) {
                 this._infeasibleRows.push(marker);
@@ -203,7 +193,7 @@ var Solver = /** @class */ (function () {
             return;
         }
         // Check next if the negative error variable is basic.
-        var other = info.tag.other;
+        let other = info.tag.other;
         rowPair = rows.find(other);
         if (rowPair !== undefined) {
             if (rowPair.second.add(delta) < 0.0) {
@@ -213,25 +203,25 @@ var Solver = /** @class */ (function () {
             return;
         }
         // Otherwise update each row where the error variables exist.
-        for (var i = 0, n = rows.size(); i < n; ++i) {
-            var rowPair_1 = rows.itemAt(i);
-            var row = rowPair_1.second;
-            var coeff = row.coefficientFor(marker);
-            if (coeff !== 0.0 && row.add(delta * coeff) < 0.0 && rowPair_1.first.type() !== SymbolType.External) {
-                this._infeasibleRows.push(rowPair_1.first);
+        for (let i = 0, n = rows.size(); i < n; ++i) {
+            let rowPair = rows.itemAt(i);
+            let row = rowPair.second;
+            let coeff = row.coefficientFor(marker);
+            if (coeff !== 0.0 && row.add(delta * coeff) < 0.0 && rowPair.first.type() !== SymbolType.External) {
+                this._infeasibleRows.push(rowPair.first);
             }
         }
         this._dualOptimize();
-    };
+    }
     /**
      * Update the values of the variables.
      */
-    Solver.prototype.updateVariables = function () {
-        var vars = this._varMap;
-        var rows = this._rowMap;
-        for (var i = 0, n = vars.size(); i < n; ++i) {
-            var pair = vars.itemAt(i);
-            var rowPair = rows.find(pair.second);
+    updateVariables() {
+        let vars = this._varMap;
+        let rows = this._rowMap;
+        for (let i = 0, n = vars.size(); i < n; ++i) {
+            let pair = vars.itemAt(i);
+            let rowPair = rows.find(pair.second);
             if (rowPair !== undefined) {
                 pair.first.setValue(rowPair.second.constant());
             }
@@ -239,18 +229,17 @@ var Solver = /** @class */ (function () {
                 pair.first.setValue(0.0);
             }
         }
-    };
+    }
     /**
      * Get the symbol for the given variable.
      *
      * If a symbol does not exist for the variable, one will be created.
      * @private
      */
-    Solver.prototype._getVarSymbol = function (variable) {
-        var _this = this;
-        var factory = function () { return _this._makeSymbol(SymbolType.External); };
+    _getVarSymbol(variable) {
+        let factory = () => this._makeSymbol(SymbolType.External);
         return this._varMap.setDefault(variable, factory).second;
-    };
+    }
     /**
      * Create a new Row object for the given constraint.
      *
@@ -268,16 +257,16 @@ var Solver = /** @class */ (function () {
      * Returns the created Row and the tag for tracking the constraint.
      * @private
      */
-    Solver.prototype._createRow = function (constraint) {
-        var expr = constraint.expression();
-        var row = new Row(expr.constant());
+    _createRow(constraint) {
+        let expr = constraint.expression();
+        let row = new Row(expr.constant());
         // Substitute the current basic variables into the row.
-        var terms = expr.terms();
-        for (var i = 0, n = terms.size(); i < n; ++i) {
-            var termPair = terms.itemAt(i);
+        let terms = expr.terms();
+        for (let i = 0, n = terms.size(); i < n; ++i) {
+            let termPair = terms.itemAt(i);
             if (!nearZero(termPair.second)) {
-                var symbol = this._getVarSymbol(termPair.first);
-                var basicPair = this._rowMap.find(symbol);
+                let symbol = this._getVarSymbol(termPair.first);
+                let basicPair = this._rowMap.find(symbol);
                 if (basicPair !== undefined) {
                     row.insertRow(basicPair.second, termPair.second);
                 }
@@ -287,18 +276,18 @@ var Solver = /** @class */ (function () {
             }
         }
         // Add the necessary slack, error, and dummy variables.
-        var objective = this._objective;
-        var strength = constraint.strength();
-        var tag = { marker: INVALID_SYMBOL, other: INVALID_SYMBOL };
+        let objective = this._objective;
+        let strength = constraint.strength();
+        let tag = { marker: INVALID_SYMBOL, other: INVALID_SYMBOL };
         switch (constraint.op()) {
             case Operator.Le:
             case Operator.Ge: {
-                var coeff = constraint.op() === Operator.Le ? 1.0 : -1.0;
-                var slack = this._makeSymbol(SymbolType.Slack);
+                let coeff = constraint.op() === Operator.Le ? 1.0 : -1.0;
+                let slack = this._makeSymbol(SymbolType.Slack);
                 tag.marker = slack;
                 row.insertSymbol(slack, coeff);
                 if (strength < Strength.required) {
-                    var error = this._makeSymbol(SymbolType.Error);
+                    let error = this._makeSymbol(SymbolType.Error);
                     tag.other = error;
                     row.insertSymbol(error, -coeff);
                     objective.insertSymbol(error, strength);
@@ -307,8 +296,8 @@ var Solver = /** @class */ (function () {
             }
             case Operator.Eq: {
                 if (strength < Strength.required) {
-                    var errplus = this._makeSymbol(SymbolType.Error);
-                    var errminus = this._makeSymbol(SymbolType.Error);
+                    let errplus = this._makeSymbol(SymbolType.Error);
+                    let errminus = this._makeSymbol(SymbolType.Error);
                     tag.marker = errplus;
                     tag.other = errminus;
                     row.insertSymbol(errplus, -1.0); // v = eplus - eminus
@@ -317,7 +306,7 @@ var Solver = /** @class */ (function () {
                     objective.insertSymbol(errminus, strength);
                 }
                 else {
-                    var dummy = this._makeSymbol(SymbolType.Dummy);
+                    let dummy = this._makeSymbol(SymbolType.Dummy);
                     tag.marker = dummy;
                     row.insertSymbol(dummy);
                 }
@@ -328,8 +317,8 @@ var Solver = /** @class */ (function () {
         if (row.constant() < 0.0) {
             row.reverseSign();
         }
-        return { row: row, tag: tag };
-    };
+        return { row, tag };
+    }
     /**
      * Choose the subject for solving for the row.
      *
@@ -346,15 +335,15 @@ var Solver = /** @class */ (function () {
      *
      * @private
      */
-    Solver.prototype._chooseSubject = function (row, tag) {
-        var cells = row.cells();
-        for (var i = 0, n = cells.size(); i < n; ++i) {
-            var pair = cells.itemAt(i);
+    _chooseSubject(row, tag) {
+        let cells = row.cells();
+        for (let i = 0, n = cells.size(); i < n; ++i) {
+            let pair = cells.itemAt(i);
             if (pair.first.type() === SymbolType.External) {
                 return pair.first;
             }
         }
-        var type = tag.marker.type();
+        let type = tag.marker.type();
         if (type === SymbolType.Slack || type === SymbolType.Error) {
             if (row.coefficientFor(tag.marker) < 0.0) {
                 return tag.marker;
@@ -367,7 +356,7 @@ var Solver = /** @class */ (function () {
             }
         }
         return INVALID_SYMBOL;
-    };
+    }
     /**
      * Add the row to the tableau using an artificial variable.
      *
@@ -375,25 +364,25 @@ var Solver = /** @class */ (function () {
      *
      * @private
      */
-    Solver.prototype._addWithArtificialVariable = function (row) {
+    _addWithArtificialVariable(row) {
         // Create and add the artificial variable to the tableau.
-        var art = this._makeSymbol(SymbolType.Slack);
+        let art = this._makeSymbol(SymbolType.Slack);
         this._rowMap.insert(art, row.copy());
         this._artificial = row.copy();
         // Optimize the artificial objective. This is successful
         // only if the artificial objective is optimized to zero.
         this._optimize(this._artificial);
-        var success = nearZero(this._artificial.constant());
+        let success = nearZero(this._artificial.constant());
         this._artificial = null;
         // If the artificial variable is basic, pivot the row so that
         // it becomes non-basic. If the row is constant, exit early.
-        var pair = this._rowMap.erase(art);
+        let pair = this._rowMap.erase(art);
         if (pair !== undefined) {
-            var basicRow = pair.second;
+            let basicRow = pair.second;
             if (basicRow.isConstant()) {
                 return success;
             }
-            var entering = this._anyPivotableSymbol(basicRow);
+            let entering = this._anyPivotableSymbol(basicRow);
             if (entering.type() === SymbolType.Invalid) {
                 return false; // unsatisfiable (will this ever happen?)
             }
@@ -402,13 +391,13 @@ var Solver = /** @class */ (function () {
             this._rowMap.insert(entering, basicRow);
         }
         // Remove the artificial variable from the tableau.
-        var rows = this._rowMap;
-        for (var i = 0, n = rows.size(); i < n; ++i) {
+        let rows = this._rowMap;
+        for (let i = 0, n = rows.size(); i < n; ++i) {
             rows.itemAt(i).second.removeSymbol(art);
         }
         this._objective.removeSymbol(art);
         return success;
-    };
+    }
     /**
      * Substitute the parametric symbol with the given row.
      *
@@ -417,10 +406,10 @@ var Solver = /** @class */ (function () {
      *
      * @private
      */
-    Solver.prototype._substitute = function (symbol, row) {
-        var rows = this._rowMap;
-        for (var i = 0, n = rows.size(); i < n; ++i) {
-            var pair = rows.itemAt(i);
+    _substitute(symbol, row) {
+        let rows = this._rowMap;
+        for (let i = 0, n = rows.size(); i < n; ++i) {
+            let pair = rows.itemAt(i);
             pair.second.substitute(symbol, row);
             if (pair.second.constant() < 0.0 && pair.first.type() !== SymbolType.External) {
                 this._infeasibleRows.push(pair.first);
@@ -430,7 +419,7 @@ var Solver = /** @class */ (function () {
         if (this._artificial) {
             this._artificial.substitute(symbol, row);
         }
-    };
+    }
     /**
      * Optimize the system for the given objective function.
      *
@@ -439,26 +428,26 @@ var Solver = /** @class */ (function () {
      *
      * @private
      */
-    Solver.prototype._optimize = function (objective) {
-        var iterations = 0;
+    _optimize(objective) {
+        let iterations = 0;
         while (iterations < this.maxIterations) {
-            var entering = this._getEnteringSymbol(objective);
+            let entering = this._getEnteringSymbol(objective);
             if (entering.type() === SymbolType.Invalid) {
                 return;
             }
-            var leaving = this._getLeavingSymbol(entering);
+            let leaving = this._getLeavingSymbol(entering);
             if (leaving.type() === SymbolType.Invalid) {
                 throw new Error('the objective is unbounded');
             }
             // pivot the entering symbol into the basis
-            var row = this._rowMap.erase(leaving).second;
+            let row = this._rowMap.erase(leaving).second;
             row.solveForEx(leaving, entering);
             this._substitute(entering, row);
             this._rowMap.insert(entering, row);
             iterations++;
         }
         throw new Error('solver iterations exceeded');
-    };
+    }
     /**
      * Optimize the system using the dual of the simplex method.
      *
@@ -469,26 +458,26 @@ var Solver = /** @class */ (function () {
      *
      * @private
      */
-    Solver.prototype._dualOptimize = function () {
-        var rows = this._rowMap;
-        var infeasible = this._infeasibleRows;
+    _dualOptimize() {
+        let rows = this._rowMap;
+        let infeasible = this._infeasibleRows;
         while (infeasible.length !== 0) {
-            var leaving = infeasible.pop();
-            var pair = rows.find(leaving);
+            let leaving = infeasible.pop();
+            let pair = rows.find(leaving);
             if (pair !== undefined && pair.second.constant() < 0.0) {
-                var entering = this._getDualEnteringSymbol(pair.second);
+                let entering = this._getDualEnteringSymbol(pair.second);
                 if (entering.type() === SymbolType.Invalid) {
                     throw new Error('dual optimize failed');
                 }
                 // pivot the entering symbol into the basis
-                var row = pair.second;
+                let row = pair.second;
                 rows.erase(leaving);
                 row.solveForEx(leaving, entering);
                 this._substitute(entering, row);
                 rows.insert(entering, row);
             }
         }
-    };
+    }
     /**
      * Compute the entering variable for a pivot operation.
      *
@@ -499,17 +488,17 @@ var Solver = /** @class */ (function () {
      *
      * @private
      */
-    Solver.prototype._getEnteringSymbol = function (objective) {
-        var cells = objective.cells();
-        for (var i = 0, n = cells.size(); i < n; ++i) {
-            var pair = cells.itemAt(i);
-            var symbol = pair.first;
+    _getEnteringSymbol(objective) {
+        let cells = objective.cells();
+        for (let i = 0, n = cells.size(); i < n; ++i) {
+            let pair = cells.itemAt(i);
+            let symbol = pair.first;
             if (pair.second < 0.0 && symbol.type() !== SymbolType.Dummy) {
                 return symbol;
             }
         }
         return INVALID_SYMBOL;
-    };
+    }
     /**
      * Compute the entering symbol for the dual optimize operation.
      *
@@ -521,17 +510,17 @@ var Solver = /** @class */ (function () {
      *
      * @private
      */
-    Solver.prototype._getDualEnteringSymbol = function (row) {
-        var ratio = Number.MAX_VALUE;
-        var entering = INVALID_SYMBOL;
-        var cells = row.cells();
-        for (var i = 0, n = cells.size(); i < n; ++i) {
-            var pair = cells.itemAt(i);
-            var symbol = pair.first;
-            var c = pair.second;
+    _getDualEnteringSymbol(row) {
+        let ratio = Number.MAX_VALUE;
+        let entering = INVALID_SYMBOL;
+        let cells = row.cells();
+        for (let i = 0, n = cells.size(); i < n; ++i) {
+            let pair = cells.itemAt(i);
+            let symbol = pair.first;
+            let c = pair.second;
             if (c > 0.0 && symbol.type() !== SymbolType.Dummy) {
-                var coeff = this._objective.coefficientFor(symbol);
-                var r = coeff / c;
+                let coeff = this._objective.coefficientFor(symbol);
+                let r = coeff / c;
                 if (r < ratio) {
                     ratio = r;
                     entering = symbol;
@@ -539,7 +528,7 @@ var Solver = /** @class */ (function () {
             }
         }
         return entering;
-    };
+    }
     /**
      * Compute the symbol for pivot exit row.
      *
@@ -550,18 +539,18 @@ var Solver = /** @class */ (function () {
      *
      * @private
      */
-    Solver.prototype._getLeavingSymbol = function (entering) {
-        var ratio = Number.MAX_VALUE;
-        var found = INVALID_SYMBOL;
-        var rows = this._rowMap;
-        for (var i = 0, n = rows.size(); i < n; ++i) {
-            var pair = rows.itemAt(i);
-            var symbol = pair.first;
+    _getLeavingSymbol(entering) {
+        let ratio = Number.MAX_VALUE;
+        let found = INVALID_SYMBOL;
+        let rows = this._rowMap;
+        for (let i = 0, n = rows.size(); i < n; ++i) {
+            let pair = rows.itemAt(i);
+            let symbol = pair.first;
             if (symbol.type() !== SymbolType.External) {
-                var row = pair.second;
-                var temp = row.coefficientFor(entering);
+                let row = pair.second;
+                let temp = row.coefficientFor(entering);
                 if (temp < 0.0) {
-                    var temp_ratio = -row.constant() / temp;
+                    let temp_ratio = -row.constant() / temp;
                     if (temp_ratio < ratio) {
                         ratio = temp_ratio;
                         found = symbol;
@@ -570,7 +559,7 @@ var Solver = /** @class */ (function () {
             }
         }
         return found;
-    };
+    }
     /**
      * Compute the leaving symbol for a marker variable.
      *
@@ -592,35 +581,35 @@ var Solver = /** @class */ (function () {
      *
      * @private
      */
-    Solver.prototype._getMarkerLeavingSymbol = function (marker) {
-        var dmax = Number.MAX_VALUE;
-        var r1 = dmax;
-        var r2 = dmax;
-        var invalid = INVALID_SYMBOL;
-        var first = invalid;
-        var second = invalid;
-        var third = invalid;
-        var rows = this._rowMap;
-        for (var i = 0, n = rows.size(); i < n; ++i) {
-            var pair = rows.itemAt(i);
-            var row = pair.second;
-            var c = row.coefficientFor(marker);
+    _getMarkerLeavingSymbol(marker) {
+        let dmax = Number.MAX_VALUE;
+        let r1 = dmax;
+        let r2 = dmax;
+        let invalid = INVALID_SYMBOL;
+        let first = invalid;
+        let second = invalid;
+        let third = invalid;
+        let rows = this._rowMap;
+        for (let i = 0, n = rows.size(); i < n; ++i) {
+            let pair = rows.itemAt(i);
+            let row = pair.second;
+            let c = row.coefficientFor(marker);
             if (c === 0.0) {
                 continue;
             }
-            var symbol = pair.first;
+            let symbol = pair.first;
             if (symbol.type() === SymbolType.External) {
                 third = symbol;
             }
             else if (c < 0.0) {
-                var r = -row.constant() / c;
+                let r = -row.constant() / c;
                 if (r < r1) {
                     r1 = r;
                     first = symbol;
                 }
             }
             else {
-                var r = row.constant() / c;
+                let r = row.constant() / c;
                 if (r < r2) {
                     r2 = r;
                     second = symbol;
@@ -634,34 +623,34 @@ var Solver = /** @class */ (function () {
             return second;
         }
         return third;
-    };
+    }
     /**
      * Remove the effects of a constraint on the objective function.
      *
      * @private
      */
-    Solver.prototype._removeConstraintEffects = function (cn, tag) {
+    _removeConstraintEffects(cn, tag) {
         if (tag.marker.type() === SymbolType.Error) {
             this._removeMarkerEffects(tag.marker, cn.strength());
         }
         if (tag.other.type() === SymbolType.Error) {
             this._removeMarkerEffects(tag.other, cn.strength());
         }
-    };
+    }
     /**
      * Remove the effects of an error marker on the objective function.
      *
      * @private
      */
-    Solver.prototype._removeMarkerEffects = function (marker, strength) {
-        var pair = this._rowMap.find(marker);
+    _removeMarkerEffects(marker, strength) {
+        let pair = this._rowMap.find(marker);
         if (pair !== undefined) {
             this._objective.insertRow(pair.second, -strength);
         }
         else {
             this._objective.insertSymbol(marker, -strength);
         }
-    };
+    }
     /**
      * Get the first Slack or Error symbol in the row.
      *
@@ -669,34 +658,40 @@ var Solver = /** @class */ (function () {
      *
      * @private
      */
-    Solver.prototype._anyPivotableSymbol = function (row) {
-        var cells = row.cells();
-        for (var i = 0, n = cells.size(); i < n; ++i) {
-            var pair = cells.itemAt(i);
-            var type = pair.first.type();
+    _anyPivotableSymbol(row) {
+        let cells = row.cells();
+        for (let i = 0, n = cells.size(); i < n; ++i) {
+            let pair = cells.itemAt(i);
+            let type = pair.first.type();
             if (type === SymbolType.Slack || type === SymbolType.Error) {
                 return pair.first;
             }
         }
         return INVALID_SYMBOL;
-    };
+    }
     /**
      * Returns a new Symbol of the given type.
      *
      * @private
      */
-    Solver.prototype._makeSymbol = function (type) {
+    _makeSymbol(type) {
         return new Symbol(type, this._idTick++);
-    };
-    return Solver;
-}());
-export { Solver };
+    }
+    _cnMap = createCnMap();
+    _rowMap = createRowMap();
+    _varMap = createVarMap();
+    _editMap = createEditMap();
+    _infeasibleRows = [];
+    _objective = new Row();
+    _artificial = null;
+    _idTick = 0;
+}
 /**
  * Test whether a value is approximately zero.
  * @private
  */
 function nearZero(value) {
-    var eps = 1.0e-8;
+    let eps = 1.0e-8;
     return value < 0.0 ? -value < eps : value < eps;
 }
 /**
@@ -743,96 +738,95 @@ var SymbolType;
  * An internal class representing a symbol in the solver.
  * @private
  */
-var Symbol = /** @class */ (function () {
+class Symbol {
     /**
      * Construct a new Symbol
      *
      * @param [type] The type of the symbol.
      * @param [id] The unique id number of the symbol.
      */
-    function Symbol(type, id) {
+    constructor(type, id) {
         this._id = id;
         this._type = type;
     }
     /**
      * Returns the unique id number of the symbol.
      */
-    Symbol.prototype.id = function () {
+    id() {
         return this._id;
-    };
+    }
     /**
      * Returns the type of the symbol.
      */
-    Symbol.prototype.type = function () {
+    type() {
         return this._type;
-    };
-    return Symbol;
-}());
+    }
+    _id;
+    _type;
+}
 /**
  * A static invalid symbol
  * @private
  */
-var INVALID_SYMBOL = new Symbol(SymbolType.Invalid, -1);
+let INVALID_SYMBOL = new Symbol(SymbolType.Invalid, -1);
 /**
  * An internal row class used by the solver.
  * @private
  */
-var Row = /** @class */ (function () {
+class Row {
     /**
      * Construct a new Row.
      */
-    function Row(constant) {
-        if (constant === void 0) { constant = 0.0; }
-        this._cellMap = createMap();
+    constructor(constant = 0.0) {
         this._constant = constant;
     }
     /**
      * Returns the mapping of symbols to coefficients.
      */
-    Row.prototype.cells = function () {
+    cells() {
         return this._cellMap;
-    };
+    }
     /**
      * Returns the constant for the row.
      */
-    Row.prototype.constant = function () {
+    constant() {
         return this._constant;
-    };
+    }
     /**
      * Returns true if the row is a constant value.
      */
-    Row.prototype.isConstant = function () {
+    isConstant() {
         return this._cellMap.empty();
-    };
+    }
     /**
      * Returns true if the Row has all dummy symbols.
      */
-    Row.prototype.allDummies = function () {
-        var cells = this._cellMap;
-        for (var i = 0, n = cells.size(); i < n; ++i) {
-            var pair = cells.itemAt(i);
+    allDummies() {
+        let cells = this._cellMap;
+        for (let i = 0, n = cells.size(); i < n; ++i) {
+            let pair = cells.itemAt(i);
             if (pair.first.type() !== SymbolType.Dummy) {
                 return false;
             }
         }
         return true;
-    };
+    }
     /**
      * Create a copy of the row.
      */
-    Row.prototype.copy = function () {
-        var theCopy = new Row(this._constant);
+    copy() {
+        let theCopy = new Row(this._constant);
         theCopy._cellMap = this._cellMap.copy();
         return theCopy;
-    };
+    }
     /**
      * Add a constant value to the row constant.
      *
      * Returns the new value of the constant.
      */
-    Row.prototype.add = function (value) {
+    add(value) {
         return (this._constant += value);
-    };
+    }
     /**
      * Insert the symbol into the row with the given coefficient.
      *
@@ -840,13 +834,12 @@ var Row = /** @class */ (function () {
      * will be added to the existing coefficient. If the resulting
      * coefficient is zero, the symbol will be removed from the row.
      */
-    Row.prototype.insertSymbol = function (symbol, coefficient) {
-        if (coefficient === void 0) { coefficient = 1.0; }
-        var pair = this._cellMap.setDefault(symbol, function () { return 0.0; });
+    insertSymbol(symbol, coefficient = 1.0) {
+        let pair = this._cellMap.setDefault(symbol, () => 0.0);
         if (nearZero((pair.second += coefficient))) {
             this._cellMap.erase(symbol);
         }
-    };
+    }
     /**
      * Insert a row into this row with a given coefficient.
      *
@@ -855,32 +848,31 @@ var Row = /** @class */ (function () {
      * cell with a resulting coefficient of zero will be removed
      * from the row.
      */
-    Row.prototype.insertRow = function (other, coefficient) {
-        if (coefficient === void 0) { coefficient = 1.0; }
+    insertRow(other, coefficient = 1.0) {
         this._constant += other._constant * coefficient;
-        var cells = other._cellMap;
-        for (var i = 0, n = cells.size(); i < n; ++i) {
-            var pair = cells.itemAt(i);
+        let cells = other._cellMap;
+        for (let i = 0, n = cells.size(); i < n; ++i) {
+            let pair = cells.itemAt(i);
             this.insertSymbol(pair.first, pair.second * coefficient);
         }
-    };
+    }
     /**
      * Remove a symbol from the row.
      */
-    Row.prototype.removeSymbol = function (symbol) {
+    removeSymbol(symbol) {
         this._cellMap.erase(symbol);
-    };
+    }
     /**
      * Reverse the sign of the constant and cells in the row.
      */
-    Row.prototype.reverseSign = function () {
+    reverseSign() {
         this._constant = -this._constant;
-        var cells = this._cellMap;
-        for (var i = 0, n = cells.size(); i < n; ++i) {
-            var pair = cells.itemAt(i);
+        let cells = this._cellMap;
+        for (let i = 0, n = cells.size(); i < n; ++i) {
+            let pair = cells.itemAt(i);
             pair.second = -pair.second;
         }
-    };
+    }
     /**
      * Solve the row for the given symbol.
      *
@@ -893,15 +885,15 @@ var Row = /** @class */ (function () {
      *
      * The given symbol *must* exist in the row.
      */
-    Row.prototype.solveFor = function (symbol) {
-        var cells = this._cellMap;
-        var pair = cells.erase(symbol);
-        var coeff = -1.0 / pair.second;
+    solveFor(symbol) {
+        let cells = this._cellMap;
+        let pair = cells.erase(symbol);
+        let coeff = -1.0 / pair.second;
         this._constant *= coeff;
-        for (var i = 0, n = cells.size(); i < n; ++i) {
+        for (let i = 0, n = cells.size(); i < n; ++i) {
             cells.itemAt(i).second *= coeff;
         }
-    };
+    }
     /**
      * Solve the row for the given symbols.
      *
@@ -914,17 +906,17 @@ var Row = /** @class */ (function () {
      * The lhs symbol *must not* exist in the row, and the rhs
      * symbol must* exist in the row.
      */
-    Row.prototype.solveForEx = function (lhs, rhs) {
+    solveForEx(lhs, rhs) {
         this.insertSymbol(lhs, -1.0);
         this.solveFor(rhs);
-    };
+    }
     /**
      * Returns the coefficient for the given symbol.
      */
-    Row.prototype.coefficientFor = function (symbol) {
-        var pair = this._cellMap.find(symbol);
+    coefficientFor(symbol) {
+        let pair = this._cellMap.find(symbol);
         return pair !== undefined ? pair.second : 0.0;
-    };
+    }
     /**
      * Substitute a symbol with the data from another row.
      *
@@ -934,11 +926,12 @@ var Row = /** @class */ (function () {
      *
      * If the symbol does not exist in the row, this is a no-op.
      */
-    Row.prototype.substitute = function (symbol, row) {
-        var pair = this._cellMap.erase(symbol);
+    substitute(symbol, row) {
+        let pair = this._cellMap.erase(symbol);
         if (pair !== undefined) {
             this.insertRow(row, pair.second);
         }
-    };
-    return Row;
-}());
+    }
+    _cellMap = createMap();
+    _constant;
+}

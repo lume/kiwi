@@ -1,4 +1,4 @@
-module.exports = {
+export default {
 	useTabs: true,
 	semi: false,
 	singleQuote: true,
@@ -7,5 +7,5 @@ module.exports = {
 	printWidth: 120,
 	arrowParens: 'avoid',
 
-	overrides: [{files: '*.md', options: {tabWidth: 2, useTabs: false}}],
+	overrides: [{files: ['*.md', '*.yml'], options: {useTabs: false, tabWidth: 2}}],
 }
