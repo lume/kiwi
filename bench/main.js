@@ -9,7 +9,8 @@ var c = typeof window === 'undefined' ? (await import('cassowary')).default : wi
 
 main()
 async function main() {
-	const kiwi = await import('@lume/kiwi')
+	// const kiwi = await import('@lume/kiwi') // self-referencing import does not work due to https://github.com/nodejs/node/issues/50334
+	const kiwi = await import('../dist/kiwi.js')
 
 	var logElement
 	function log(message) {

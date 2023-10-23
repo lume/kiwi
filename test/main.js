@@ -3,7 +3,8 @@ var assert = typeof window === 'undefined' ? (await import('assert')).default : 
 
 describe('import kiwi', function () {
 	it('imports kiwi', async function () {
-		const kiwi = await import('@lume/kiwi')
+		// const kiwi = await import('@lume/kiwi') // self-referencing import does not work due to https://github.com/nodejs/node/issues/50334
+		const kiwi = await import('../dist/kiwi.js')
 
 		describe('kiwi', function () {
 			it('create Solver', function () {
