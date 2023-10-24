@@ -50,8 +50,8 @@
 		"doc": "rollup -c && jsdoc2md -f tmp/kiwi.js -m none -g none > docs/Kiwi.md && node scripts/docs-update-headings.js && prettier docs/Kiwi.md --write",
 		"bench": "node bench/main.js",
 		"version": "npm run clean && npm run build && npm test && npm run bench && git add .",
-		"release:patch": "npm version patch -m 'v%s' && npm publish && git push --follow-tags",
-		"release:minor": "npm version minor -m 'v%s' && npm publish && git push --follow-tags",
-		"release:major": "npm version major -m 'v%s' && npm publish && git push --follow-tags"
+		"release:patch": "npm version --no-workspaces patch -m 'v%s' && npm publish && git push --follow-tags",
+		"release:minor": "npm version --no-workspaces minor -m 'v%s' && npm publish && git push --follow-tags",
+		"release:major": "npm version --no-workspaces major -m 'v%s' && npm publish && git push --follow-tags"
 	}
 }
