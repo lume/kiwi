@@ -35,7 +35,7 @@
 		"prettier": "3.0.3",
 		"rimraf": "^3.0.2",
 		"rollup": "4.1.4",
-		"typescript": "5.2.2"
+		"typescript": "^5.0.0"
 	},
 	"scripts": {
 		"build": "tsc",
