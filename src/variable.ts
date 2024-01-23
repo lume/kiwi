@@ -67,7 +67,28 @@ export class Variable {
 	 * @private
 	 */
 	public setValue(value: number): void {
+		var previousValue = this._value
 		this._value = value
+		if (this._callback && previousValue !== value) {
+			this._callback(value, previousValue)
+		}
+	}
+
+	/**
+	 * Set a callback for whenever the value changes.
+	 *
+	 * @param {function(number,number):void} callback to call whenever the variable value changes
+	 */
+	public subscribe(callback: (value: number, previousValue: number) => void): void {
+		this._callback = callback
+	}
+
+	/**
+	 * Stops the variable from calling the callback when the variable value
+	 * changes.
+	 */
+	public unsubscribe(): void {
+		this._callback = null
 	}
 
 	/**
@@ -131,6 +152,7 @@ export class Variable {
 	private _value: number = 0.0
 	private _context: any = null
 	private _id: number = VarId++
+	private _callback: (value: number, previousValue: number) => void
 }
 
 /**

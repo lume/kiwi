@@ -48,6 +48,8 @@ console.assert(centerX.value() === 250)
     - [.name()](#module_@lume/kiwi..Variable+name) ⇒ <code>String</code>
     - [.setName(name)](#module_@lume/kiwi..Variable+setName)
     - [.value()](#module_@lume/kiwi..Variable+value) ⇒ <code>Number</code>
+    - [.subscribe(callback)](#module_@lume/kiwi..Variable+subscribe)
+    - [.unsubscribe()](#module_@lume/kiwi..Variable+unsubscribe)
     - [.plus(value)](#module_@lume/kiwi..Variable+plus) ⇒ <code>Expression</code>
     - [.minus(value)](#module_@lume/kiwi..Variable+minus) ⇒ <code>Expression</code>
     - [.multiply(coefficient)](#module_@lume/kiwi..Variable+multiply) ⇒ <code>Expression</code>
@@ -98,6 +100,8 @@ The primary user constraint variable.
   - [.name()](#module_@lume/kiwi..Variable+name) ⇒ <code>String</code>
   - [.setName(name)](#module_@lume/kiwi..Variable+setName)
   - [.value()](#module_@lume/kiwi..Variable+value) ⇒ <code>Number</code>
+  - [.subscribe(callback)](#module_@lume/kiwi..Variable+subscribe)
+  - [.unsubscribe()](#module_@lume/kiwi..Variable+unsubscribe)
   - [.plus(value)](#module_@lume/kiwi..Variable+plus) ⇒ <code>Expression</code>
   - [.minus(value)](#module_@lume/kiwi..Variable+minus) ⇒ <code>Expression</code>
   - [.multiply(coefficient)](#module_@lume/kiwi..Variable+multiply) ⇒ <code>Expression</code>
@@ -139,6 +143,26 @@ Returns the value of the variable.
 
 **Kind**: instance method of [<code>Variable</code>](#module_@lume/kiwi..Variable)  
 **Returns**: <code>Number</code> - Calculated value  
+<a name="module_@lume/kiwi..Variable+subscribe"></a>
+
+### variable.subscribe(callback)
+
+Set a callback for whenever the value changes.
+
+**Kind**: instance method of [<code>Variable</code>](#module_@lume/kiwi..Variable)
+
+| Param    | Type                  | Description                                 |
+| -------- | --------------------- | ------------------------------------------- |
+| callback | <code>function</code> | to call whenever the variable value changes |
+
+<a name="module_@lume/kiwi..Variable+unsubscribe"></a>
+
+### variable.unsubscribe()
+
+Stops the variable from calling the callback when the variable value
+changes.
+
+**Kind**: instance method of [<code>Variable</code>](#module_@lume/kiwi..Variable)  
 <a name="module_@lume/kiwi..Variable+plus"></a>
 
 ### variable.plus(value) ⇒ <code>Expression</code>
