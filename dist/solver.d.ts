@@ -45,6 +45,12 @@ export declare class Solver {
      */
     hasConstraint(constraint: Constraint): boolean;
     /**
+     * Get an array of the current constraints.
+     *
+     * @return {Constraint[]}
+     */
+    getConstraints(): Constraint[];
+    /**
      * Add an edit variable to the solver.
      *
      * @param {Variable} variable Edit variable to add to the solver
