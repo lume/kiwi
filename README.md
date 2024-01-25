@@ -13,11 +13,16 @@ compiler).
 
 ## Index
 
+- [Demo](#demo)
 - [Install](#install)
 - [Usage](#usage)
 - [Documentation](#documentation)
 - [Benchmarks](#benchmarks)
 - [Tests](#tests)
+
+## Demo
+
+[Live demo on CodePen.](https://codepen.io/trusktr/pen/abMLVxa?editors=1010)
 
 ## Install
 
@@ -76,6 +81,16 @@ solver.addConstraint(new kiwi.Constraint(new kiwi.Expression([-1, right], left, 
 solver.updateVariables()
 
 console.assert(right.value() === 500)
+
+// later, update the constraints and re-calculate
+setTimeout(() => {
+	solver.suggestValue(left, 200)
+	solver.suggestValue(width, 600)
+	
+	solver.updateVariables() // update
+	
+	console.assert(right.value() === 800)	
+}, 2000)
 ```
 
 ## Documentation
