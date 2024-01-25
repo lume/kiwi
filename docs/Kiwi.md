@@ -78,6 +78,7 @@ console.assert(centerX.value() === 250)
     - [.addConstraint(constraint)](#module_@lume/kiwi..Solver+addConstraint)
     - [.removeConstraint(constraint)](#module_@lume/kiwi..Solver+removeConstraint)
     - [.hasConstraint(constraint)](#module_@lume/kiwi..Solver+hasConstraint) ⇒ <code>Bool</code>
+    - [.getConstraints()](#module_@lume/kiwi..Solver+getConstraints) ⇒ <code>[ &#x27;Array&#x27; ].&lt;Constraint&gt;</code>
     - [.addEditVariable(variable, strength)](#module_@lume/kiwi..Solver+addEditVariable)
     - [.removeEditVariable(variable)](#module_@lume/kiwi..Solver+removeEditVariable)
     - [.hasEditVariable(variable)](#module_@lume/kiwi..Solver+hasEditVariable) ⇒ <code>Bool</code>
@@ -406,6 +407,7 @@ The constraint solver class.
   - [.addConstraint(constraint)](#module_@lume/kiwi..Solver+addConstraint)
   - [.removeConstraint(constraint)](#module_@lume/kiwi..Solver+removeConstraint)
   - [.hasConstraint(constraint)](#module_@lume/kiwi..Solver+hasConstraint) ⇒ <code>Bool</code>
+  - [.getConstraints()](#module_@lume/kiwi..Solver+getConstraints) ⇒ <code>[ &#x27;Array&#x27; ].&lt;Constraint&gt;</code>
   - [.addEditVariable(variable, strength)](#module_@lume/kiwi..Solver+addEditVariable)
   - [.removeEditVariable(variable)](#module_@lume/kiwi..Solver+removeEditVariable)
   - [.hasEditVariable(variable)](#module_@lume/kiwi..Solver+hasEditVariable) ⇒ <code>Bool</code>
@@ -477,6 +479,13 @@ Test whether the solver contains the constraint.
 | ---------- | ----------------------- | ---------------------- |
 | constraint | <code>Constraint</code> | Constraint to test for |
 
+<a name="module_@lume/kiwi..Solver+getConstraints"></a>
+
+### solver.getConstraints() ⇒ <code>[ &#x27;Array&#x27; ].&lt;Constraint&gt;</code>
+
+Get an array of the current constraints.
+
+**Kind**: instance method of [<code>Solver</code>](#module_@lume/kiwi..Solver)  
 <a name="module_@lume/kiwi..Solver+addEditVariable"></a>
 
 ### solver.addEditVariable(variable, strength)

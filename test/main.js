@@ -178,6 +178,31 @@ describe('import kiwi', function () {
 					assert.equal(err.message, 'unsatisfiable constraint')
 				}
 			})
+			it('solver.addConstraint() => solver.getConstraints()', function () {
+				solver = new kiwi.Solver()
+				var width = new kiwi.Variable()
+				var width2 = new kiwi.Variable()
+				var cn_1 = new kiwi.Constraint(new kiwi.Expression(width, 100), kiwi.Operator.Eq)
+				solver.addConstraint(cn_1)
+				var cn_2 = new kiwi.Constraint(new kiwi.Expression(width2, 100), kiwi.Operator.Eq)
+				solver.addConstraint(cn_2)
+				var cns = solver.getConstraints()
+				assert(cns.indexOf(cn_1) > -1)
+				assert(cns.indexOf(cn_2) > -1)
+			})
+			it('solver.removeConstraint() => solver.getConstraints()', function () {
+				solver = new kiwi.Solver()
+				var width = new kiwi.Variable()
+				var width2 = new kiwi.Variable()
+				var cn_1 = new kiwi.Constraint(new kiwi.Expression(width, 100), kiwi.Operator.Eq)
+				solver.addConstraint(cn_1)
+				var cn_2 = new kiwi.Constraint(new kiwi.Expression(width2, 100), kiwi.Operator.Eq)
+				solver.addConstraint(cn_2)
+				solver.removeConstraint(cn_1)
+				var cns = solver.getConstraints()
+				assert(cns.indexOf(cn_1) === -1)
+				assert(cns.indexOf(cn_2) > -1)
+			})
 		})
 
 		describe('Constraint raw syntax: (expr, operator, undefined, strength)', function () {
