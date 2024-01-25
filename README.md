@@ -26,25 +26,17 @@ compiler).
 
 ## Install
 
+### Local Install
+
 Install using NPM:
 
 ```sh
 npm install @lume/kiwi
 ```
 
-then import it into your project:
-
-```js
-import * as kiwi from '@lume/kiwi'
-
-console.log(kiwi)
-
-// ...use kiwi...
-```
-
 If you have a plain web app with no build, or a non-browser JS runtime that also
 supports import maps like Deno, you'll need to add `@lume/kiwi` to your
-`importmap` script so that the browser knows where to import kiwi from. F.e.
+`importmap` script so that the browser or JS runtime knows where to import kiwi from. F.e.
 something like this:
 
 ```html
@@ -57,7 +49,31 @@ something like this:
 </script>
 ```
 
+### CDN Install
+
+Note, if using importmaps and native ES Modules in a browser, or in a JS runtime like Deno, you can get Kiwi directly from the UNPKG CDN without installing it locally (just as the [live CodePen demo](#demo) does):
+
+```html
+<script type="importmap">
+  {
+    "imports": {
+      "@lume/kiwi": "https://unpkg.com/@lume/kiwi@0.4.2/dist/kiwi.js",
+    }
+  }
+</script>
+```
+
 ## Usage
+
+After installing, import kiwi into your project:
+
+```js
+import * as kiwi from '@lume/kiwi'
+
+console.log(kiwi)
+
+// ...use kiwi...
+```
 
 The following example creates a solver which automatically calculates a width based on some constraints:
 
@@ -99,7 +115,7 @@ setTimeout(() => {
 
 ## Benchmarks
 
-To run the benchmark in the browser, [just visit this page](https://rawgit.com/IjzerenHein/kiwi/master/bench/index.html).
+To run the benchmark in the browser, [just visit this page](https://raw.githack.com/lume/kiwi/main/bench/index.html).
 
 To run the benchmark locally using nodejs, _clone or download this repository_ and execute the following steps:
 
@@ -126,7 +142,7 @@ Fastest is kiwi (± 2.29x faster)
 
 ## Tests
 
-To run the tests in the browser, [just visit this page](https://rawgit.com/IjzerenHein/kiwi/master/test/index.html).
+To run the tests in the browser, [just visit this page](https://raw.githack.com/lume/kiwi/main/test/index.html).
 
 To run the tests locally using nodejs, _clone or download this repository_ and execute the following steps:
 
@@ -150,12 +166,12 @@ open a pull request!
 
 [![License](https://img.shields.io/badge/license-BDS%203--clause-brightgreen)](<https://tldrlegal.com/license/bsd-3-clause-license-(revised)>)
 
-<!--
-TODO
 
 ## Status
 
-[![Build Status](https://travis-ci.org/IjzerenHein/kiwi.js.svg?branch=master)](https://travis-ci.org/IjzerenHein/kiwi.js)
-[![codecov](https://codecov.io/gh/IjzerenHein/kiwi.js/branch/master/graph/badge.svg)](https://codecov.io/gh/IjzerenHein/kiwi.js)
+[![Build Status](https://github.com/lume/kiwi/actions/workflows/tests.yml/badge.svg)](https://github.com/lume/kiwi/actions/workflows/tests.yml)
 
+<!--
+TODO coverage status
+[![codecov](https://codecov.io/gh/IjzerenHein/kiwi.js/branch/master/graph/badge.svg)](https://codecov.io/gh/IjzerenHein/kiwi.js)
 -->
