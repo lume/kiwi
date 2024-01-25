@@ -57,7 +57,7 @@ Note, if using importmaps and native ES Modules in a browser, or in a JS runtime
 <script type="importmap">
   {
     "imports": {
-      "@lume/kiwi": "https://unpkg.com/@lume/kiwi@0.4.2/dist/kiwi.js",
+      "@lume/kiwi": "https://unpkg.com/@lume/kiwi@0.4.2/dist/kiwi.js"
     }
   }
 </script>
@@ -100,12 +100,12 @@ console.assert(right.value() === 500)
 
 // later, update the constraints and re-calculate
 setTimeout(() => {
-	solver.suggestValue(left, 200)
-	solver.suggestValue(width, 600)
-	
-	solver.updateVariables() // update
-	
-	console.assert(right.value() === 800)	
+  solver.suggestValue(left, 200)
+  solver.suggestValue(width, 600)
+
+  solver.updateVariables() // update
+
+  console.assert(right.value() === 800)
 }, 2000)
 ```
 
@@ -165,7 +165,6 @@ open a pull request!
 © 2021 Lume
 
 [![License](https://img.shields.io/badge/license-BDS%203--clause-brightgreen)](<https://tldrlegal.com/license/bsd-3-clause-license-(revised)>)
-
 
 ## Status
 
