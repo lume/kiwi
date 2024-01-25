@@ -18,7 +18,7 @@ jobs:
       - name: Use Node.js latest
         uses: actions/setup-node@v3
         with:
-          node-version: 17
+          node-version: 20
       - name: npm install, build, and test
         # Note, we run bench and cov just to make sure they run successfully, but we're not doing anything with the result yet.
         run: |
