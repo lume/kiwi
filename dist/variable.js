@@ -59,7 +59,26 @@ export class Variable {
      * @private
      */
     setValue(value) {
+        var previousValue = this._value;
         this._value = value;
+        if (this._callback && previousValue !== value) {
+            this._callback(value, previousValue);
+        }
+    }
+    /**
+     * Set a callback for whenever the value changes.
+     *
+     * @param {function(number,number):void} callback to call whenever the variable value changes
+     */
+    subscribe(callback) {
+        this._callback = callback;
+    }
+    /**
+     * Stops the variable from calling the callback when the variable value
+     * changes.
+     */
+    unsubscribe() {
+        this._callback = null;
     }
     /**
      * Creates a new Expression by adding a number, variable or expression
@@ -116,6 +135,7 @@ export class Variable {
     _value = 0.0;
     _context = null;
     _id = VarId++;
+    _callback;
 }
 /**
  * The internal variable id counter.

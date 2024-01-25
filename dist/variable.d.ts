@@ -46,6 +46,17 @@ export declare class Variable {
      */
     setValue(value: number): void;
     /**
+     * Set a callback for whenever the value changes.
+     *
+     * @param {function(number,number):void} callback to call whenever the variable value changes
+     */
+    subscribe(callback: (value: number, previousValue: number) => void): void;
+    /**
+     * Stops the variable from calling the callback when the variable value
+     * changes.
+     */
+    unsubscribe(): void;
+    /**
      * Creates a new Expression by adding a number, variable or expression
      * to the variable.
      *
@@ -85,5 +96,6 @@ export declare class Variable {
     private _value;
     private _context;
     private _id;
+    private _callback;
 }
 //# sourceMappingURL=variable.d.ts.map

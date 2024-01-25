@@ -39,6 +39,33 @@ describe('import kiwi', function () {
 				solver.updateVariables()
 				assert.equal(200, variable.value())
 			})
+			it('variable.subscribe(callback) => value: 400', function () {
+				var var2 = new kiwi.Variable()
+				var val, previousVal
+				var2.subscribe((value, previousValue) => ((val = value), (previousVal = previousValue)))
+				assert.equal(val, undefined)
+				assert.equal(previousVal, undefined)
+				solver.addEditVariable(var2, kiwi.Strength.strong)
+				solver.suggestValue(var2, 400)
+				solver.updateVariables()
+				assert.equal(val, 400)
+				assert.equal(previousVal, 0)
+				solver.suggestValue(var2, 500)
+				solver.updateVariables()
+				assert.equal(val, 500)
+				assert.equal(previousVal, 400)
+			})
+			it('variable.unsubscribe()', function () {
+				var var2 = new kiwi.Variable()
+				var val, previousVal
+				var2.subscribe((value, previousValue) => ((val = value), (previousVal = previousValue)))
+				solver.addEditVariable(var2, kiwi.Strength.strong)
+				solver.suggestValue(var2, 300)
+				var2.unsubscribe()
+				solver.updateVariables()
+				assert.equal(val, undefined)
+				assert.equal(previousVal, undefined)
+			})
 			it('solver.removeEditVariable(variable) => solver.hasEditVariable(): false', function () {
 				assert(solver.hasEditVariable(variable))
 				solver.removeEditVariable(variable)
