@@ -12,8 +12,8 @@ import { Variable } from './variable.js';
  * @enum {Number}
  */
 export declare enum Operator {
-    Le = 0,// <=
-    Ge = 1,// >=
+    Le = 0,
+    Ge = 1,
     Eq = 2
 }
 /**
