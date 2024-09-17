@@ -9,9 +9,9 @@ declare class IndexedMap<T extends {
     id(): number;
 }, U> {
     index: {
-        [id: number]: number;
+        [id: number]: number | undefined;
     };
-    array: Pair<T, U>[];
+    array: Array<Pair<T, U>>;
     /**
      * Returns the number of items in the array.
      */
