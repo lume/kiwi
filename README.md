@@ -1,4 +1,4 @@
-# LUME Kiwi
+![Image](https://github.com/user-attachments/assets/c23cfc96-cb04-483b-83cf-d33332322dd9)
 
 LUME Kiwi is a fast TypeScript implementation of the [Cassowary constraint
 solving algorithm](<https://en.wikipedia.org/wiki/Cassowary_(software)>), based on the seminal Cassowary paper. Originally created by
