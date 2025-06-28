@@ -28,5 +28,6 @@ jobs:
           npm run bench
           npm test
           npm run cov
+          echo $(tty)
         env:
           CI: true
