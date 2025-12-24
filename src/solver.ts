@@ -14,7 +14,7 @@ export class Solver {
 	 * @type {number} - The max number of solver iterations before an error
 	 * is thrown, in order to prevent infinite iteration. Default: `10,000`.
 	 */
-	public maxIterations = 1000
+	public maxIterations = 10000
 
 	/**
 	 * Construct a new Solver.

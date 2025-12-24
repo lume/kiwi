@@ -28,7 +28,7 @@ solver.addEditVariable(width, kiwi.Strength.strong)
 // Create a variable calculated through a constraint
 const centerX = new kiwi.Variable()
 const expr = new kiwi.Expression([-1, centerX], left, [0.5, width])
-solver.addConstraint(new kiwi.Constraint(expr, kiwi.Operator.Eq, kiwi.Strength.required))
+solver.addConstraint(new kiwi.Constraint(expr, kiwi.Operator.Eq, 0, kiwi.Strength.required))
 
 // Suggest some values to the solver
 solver.suggestValue(left, 0)
